@@ -1,0 +1,75 @@
+.home-container{
+    width: 100vw;
+    min-height: calc(100vh - 70px);
+    height: max-content;
+    background-color: yellow;
+    padding-top: 50px;
+    overflow-y: scroll;
+}
+.inputGen-container{
+    margin: auto;
+    height: max-content;
+    width: max-content;
+}
+.inputGen-container>form{
+    width: 40vw;
+    height:50vh;
+    background-color: purple;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.inputGen-container>form>.mainoptions{
+    width: 100%;
+    height: max-content;
+    justify-content: space-around;
+}
+.mainoptions>button{
+    width: 100px;
+    height: 30px;
+}
+.inputGen-container>form button{
+    cursor: pointer;
+}
+.inputGen-container>form>div{
+    width: 100%;
+    display: flex;
+    height: max-content;
+    align-items: center;
+    justify-content: center;
+}
+.inputGen-container>form input{
+    width:70%;
+    height: 30px;
+}
+#copyPasswordBtn{
+    width: 30px;
+    height: 30px;
+}
+#regenerateBtn,
+#saveBtn{
+    width: 100px;
+    height: 50px;
+}
+
+
+/*  */
+
+h2{
+    text-align: center;
+    margin-top: 50px;
+}
+table{
+    margin: auto;
+    margin-top: 50px;
+}
+.addPass{
+    position: absolute;
+    bottom: 20px;
+    right: 50px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+}
