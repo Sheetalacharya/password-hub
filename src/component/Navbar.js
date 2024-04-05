@@ -9,7 +9,7 @@ export default function Navbar() {
   return (
     <nav>
         <div className="logo">
-            LOGO
+            Password Hub
         </div>
         <div className='profileBtn'>
         <button className='profileIcon' onClick={handleListVisibility}>a</button>

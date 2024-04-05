@@ -1,13 +1,17 @@
 .home-container{
     width: 100vw;
-    min-height: calc(100vh - 70px);
-    height: max-content;
+    /* min-height: 100%; */
+    height: calc(100vh - 70px);
     background-color: yellow;
-    padding-top: 50px;
+    padding-top: 50px;  
+    overflow-x: hidden;
     overflow-y: scroll;
 }
+/* .home-container::-webkit-scrollbar{
+    display: none;
+} */
 .inputGen-container{
-    margin: auto;
+    margin: 0 auto;
     height: max-content;
     width: max-content;
 }
@@ -16,41 +20,64 @@
     height:50vh;
     background-color: purple;
     display: flex;
+    gap: 10px;
     align-items: center;
     justify-content: center;
     flex-direction: column;
 }
-.inputGen-container>form>.mainoptions{
-    width: 100%;
-    height: max-content;
-    justify-content: space-around;
-}
-.mainoptions>button{
-    width: 100px;
-    height: 30px;
-}
 .inputGen-container>form button{
     cursor: pointer;
 }
-.inputGen-container>form>div{
+.inputGen-container>form>.mainoptions{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+.inputGen-container>form>.mainoptions>button{
+    width: max-content;
+    height: 40px;
+    padding: 0 20px;
+    border-radius: 5px;
+}
+
+#title-input{
+    width:70%;
+    height: 30px;
+
+}
+.inputGen-container>form :nth-child(3){
+    width: 100%;
+    height: max-content;
+    display: flex;
+    justify-content: center;
+}
+#password-output{
+    width: 70%;
+    height: 30px;
+    position: relative;
+    left: 3%;
+}
+#copyPasswordBtn{
+    width: 30px;
+    height: 30px;
+    position: relative;
+    left: 4%;
+}
+.inputGen-container>form>div:last-child{
     width: 100%;
     display: flex;
     height: max-content;
     align-items: center;
     justify-content: center;
+    gap:20px;
+    margin-top: 20px;
 }
-.inputGen-container>form input{
-    width:70%;
-    height: 30px;
-}
-#copyPasswordBtn{
-    width: 30px;
-    height: 30px;
-}
+
+
 #regenerateBtn,
 #saveBtn{
-    width: 100px;
-    height: 50px;
+    padding: 10px 15px;
 }
 
 
@@ -60,14 +87,11 @@ h2{
     text-align: center;
     margin-top: 50px;
 }
-table{
-    margin: auto;
-    margin-top: 50px;
-}
+
 .addPass{
-    position: absolute;
+    position: fixed;
     bottom: 20px;
-    right: 50px;
+    right: 30px;
     width: 50px;
     height: 50px;
     border-radius: 50%;
