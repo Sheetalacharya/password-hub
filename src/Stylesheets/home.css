@@ -16,7 +16,7 @@
     width: max-content;
 }
 .inputGen-container>form{
-    width: 40vw;
+    width: 60vw;
     height:50vh;
     background-color: purple;
     display: flex;
@@ -24,6 +24,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    border-radius: 10px;
 }
 .inputGen-container>form button{
     cursor: pointer;
@@ -39,30 +40,31 @@
     height: 40px;
     padding: 0 20px;
     border-radius: 5px;
+    border-radius: 10px;
 }
 
-#title-input{
+#title-input,#password-output{
     width:70%;
-    height: 30px;
-
+    height: 35px;
+    border-radius: 5px;
+}
+#title-input::placeholder,#password-output::placeholder{
+    padding-left: 10px;
 }
 .inputGen-container>form :nth-child(3){
     width: 100%;
     height: max-content;
     display: flex;
     justify-content: center;
-}
-#password-output{
-    width: 70%;
-    height: 30px;
+    align-items: center;
     position: relative;
-    left: 3%;
 }
+
 #copyPasswordBtn{
     width: 30px;
     height: 30px;
-    position: relative;
-    left: 4%;
+    position: absolute;
+    right: 15%;
 }
 .inputGen-container>form>div:last-child{
     width: 100%;
@@ -78,6 +80,7 @@
 #regenerateBtn,
 #saveBtn{
     padding: 10px 15px;
+    border-radius: 7px;
 }
 
 

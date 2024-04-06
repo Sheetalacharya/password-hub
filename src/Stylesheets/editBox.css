@@ -1,0 +1,48 @@
+.editBox-container{
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.sub-editCont{
+    min-width: 50%;
+  max-width: max-content;
+  min-height: 40%;
+  max-height: max-content;
+  background-color: rgb(0, 255, 26);
+  border-radius: 10px;
+  padding: 10px;
+  padding-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+}
+.sub-editCont  input{
+    width: 300px;
+    height: 30px;
+}
+.sub-editCont >div>input{
+    position: relative;
+    left: 10px;
+}
+.sub-editCont >div>i{
+    position: relative;
+    left: 12px;
+    cursor: pointer;
+}
+.sub-editCont>div:last-child{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+.sub-editCont>div:last-child>button{
+    padding: 10px 15px;  
+    border-radius: 10px;
+}

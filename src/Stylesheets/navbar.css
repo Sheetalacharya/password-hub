@@ -13,8 +13,8 @@ nav>.logo{
     margin: 50px;
 }
 .profileBtn>button{
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     cursor: pointer;
 }
@@ -23,7 +23,9 @@ nav>.logo{
     top: 70px;
     right: 20px;
     background-color: red;
+    border: 1px solid;
     width: 100px;
+    border-radius: 10px;
 }
 .profileList>li{
     margin: 10px 0;
@@ -35,5 +37,5 @@ nav>.logo{
     height: 50px;
     cursor: pointer;
     background-color: transparent;
-    border: none;
+    border: 1px solid;
 }
