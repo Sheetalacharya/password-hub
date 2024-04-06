@@ -78,7 +78,7 @@ const Signp = () => {
                         <label >Phone Number</label>
                     </div>
                     <div className='inputRegister'>
-                        <img src={passwordIcon} alt="" onClick={togglePasswordVisibility} />
+                        <img src={password_icon} alt=""  />
                         <input type={passwordVisible ? "text" : "password"} name="password" value={signupValues.password} onChange={inputHandler} />
                         <label>Password</label>
                     </div>
@@ -89,7 +89,7 @@ const Signp = () => {
                     </div>
                     <button type="submit" className='btn' onClick={signup}>SignUp</button>
                     <div className="register-login">
-                        <p>Already have an account?<a href="signin" className="register-link">Login</a></p>
+                        <p>Already have an account? <a href="signin" className="register-link">Login</a></p>
                     </div>
                 </form>
             </div>
