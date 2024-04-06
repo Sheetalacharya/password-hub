@@ -1,0 +1,301 @@
+.signupBody {
+    background-image: url('../assets/Img-bg.png');
+    background-size: cover;
+    background-position: center;
+    height:100vh;
+    overflow-x:hidden;
+    overflow-y: scroll;
+  }
+  
+  .wrapper {
+      display: flex;
+      flex-direction: column;
+      margin: auto;
+      margin-top: 150px;
+      padding-bottom: 30px;
+      width: 500px;
+      height: 750px;
+      background-color: rgba(255, 255, 255, 0.3); 
+      border: 2px solid rgba(255, 255, 255, 0.5);
+      border-radius: 20px;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+    }
+    
+    .wrapper .form-box {
+      width: 100%;
+      padding: 40px;
+    }
+    
+    .form-box h2 {
+      font-size: 2em;
+      color: #162938;
+      text-align: center;
+    }
+    
+    .inputRegister {
+      position: relative;
+      width: 100%;
+      height: 50px;
+      border-bottom: 2px solid #162936;
+      margin: 30px 0;
+    }
+    
+    .inputRegister label {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%); 
+      left: 5px;
+      font-size: 1em;
+      color: #162936;
+      font-weight: 500;
+      pointer-events: none;
+    }
+    
+    .inputRegister input {
+      width: calc(100% - 30px); 
+      height: 100%;
+      background-color: transparent !important;
+      border: none;
+      outline: none;
+      padding-right: 30px; 
+    }
+    
+    .inputRegister img {
+      position: absolute;
+      top: 40%;
+      right: 8px;
+      transform: translateY(-50%); 
+      width: 20px;
+      height: 20px;
+    }
+    
+    .inputRegister input:focus + label,
+  .inputRegister input:not(:placeholder-shown) + label {
+      top: -3px; 
+      
+      color: #6b6b6b; 
+  }
+ 
+  .btn{
+      width:100%;
+      height:45px;
+      background: #162938;
+      border:none;
+      outline:none;
+      border-radius: 6px;
+      cursor: pointer;
+      color:#fff;
+      font-size: 1em;
+      font-weight: 500;
+  
+  }
+  .btn:hover{
+    background-color: #3b4c58;
+    color:white;
+  }
+  
+  .register-login{
+      font-size: .9em;
+      color: #162938;
+      text-align: center;
+      margin: 25px 0 10px;
+      font-weight: 500;
+  }
+  .register-login p a{
+      color: #162938;
+      text-decoration: none;
+      font-weight: 600;
+  }
+  .register-login p a:hover{
+      text-decoration: underline;
+  }
+  
+
+  /* */
+  /*  */
+
+  @media screen and (max-width: 300px) {
+    .wrapper {
+        margin-top: 30px; 
+        width: 90%; 
+    }
+
+    .form-box {
+        padding: 20px; 
+    }
+
+    .inputRegister {
+        margin: 15px 0; 
+    }
+
+    .inputRegister input {
+        padding-right: 20px; 
+    }
+
+    .btn {
+        height: 40px; 
+        font-size: 0.9em;
+    }
+
+    .register-login {
+        margin: 10px 0; 
+    }
+}
+
+
+@media screen and (max-width: 500px) {
+    .wrapper {
+        margin-top: 50px; 
+        width: 90%; 
+    }
+
+    .form-box {
+        padding: 30px; 
+    }
+
+    .btn {
+        font-size: 0.8em; 
+    }
+
+    .inputRegister img {
+        display: none; 
+    }
+}
+
+
+/* Styling for login page */
+
+.signinBody {
+  background-image: url('../assets/Img-bg.png');
+  background-size: cover;
+  background-position: center;
+  height:100vh;
+  overflow-x:hidden;
+  overflow-y: scroll;
+}
+.wrapper1 {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  margin-top: 100px;
+  padding-bottom: 30px;
+  width: 500px;
+  height: 450px;
+  background-color: rgba(255, 255, 255, 0.3); 
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+}
+.wrapper1 .form-box {
+  width: 100%;
+  padding: 40px;
+}
+.inputlogin {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  border-bottom: 2px solid #162936;
+  margin: 30px 0;
+}
+
+.inputlogin label {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%); 
+  left: 5px;
+  font-size: 1em;
+  color: #162936;
+  font-weight: 500;
+  pointer-events: none;
+}
+
+.inputlogin input {
+  width: calc(100% - 30px); 
+  height: 100%;
+  background-color: transparent !important;
+  border: none;
+  outline: none;
+  padding-right: 30px; 
+}
+
+.inputlogin img {
+  position: absolute;
+  top: 40%;
+  right: 8px;
+  transform: translateY(-50%); 
+  width: 20px;
+  height: 20px;
+}
+
+.inputlogin input:focus + label,
+.inputlogin input:not(:placeholder-shown) + label {
+  top: -3px; 
+  
+  color: #6b6b6b; 
+}
+
+/* Responsiveness */
+@media screen and (max-width: 300px) {
+  .wrapper1 {
+      margin-top: 100px; 
+      width: 90%; 
+      
+  }
+
+  .form-box {
+      padding: 20px; 
+  }
+
+  .inputlogin {
+      margin: 15px 0; 
+  }
+
+  .inputlogin input {
+      padding-right: 20px; 
+  }
+
+  .btn {
+      height: 40px; 
+      font-size: 0.9em;
+  }
+
+  .register-login {
+      margin: 10px 0; 
+  }
+  .inputlogin img {
+    display: none; 
+}
+}
+@media screen and (max-width: 500px) {
+  .wrapper1 {
+      margin-top: 100px; 
+      width: 90%; 
+  }
+
+  .form-box {
+      padding: 20px; 
+  }
+
+  .inputlogin {
+      margin: 15px 0; 
+  }
+
+  .inputlogin input {
+      padding-right: 20px; 
+  }
+
+  .btn {
+      height: 40px; 
+      font-size: 0.9em;
+  }
+
+  .register-login {
+      margin: 10px 0; 
+  }
+}
+
+
+
+
