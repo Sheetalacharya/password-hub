@@ -26,6 +26,15 @@
     align-items: center;
     justify-content: center;
 }
+#password-cardField>i{
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-left: 5px;
+}
 #title-cardField >input,
 #password-cardField>input{
     width: 80%;
