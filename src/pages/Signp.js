@@ -26,6 +26,29 @@ const Signp = () => {
     setSigupValues({...signupValues,[e.target.name]:e.target.value})
    };
 
+   
+   async function signup(e) {
+    e.preventDefault();
+    console.log(signupValues);
+    const { email, password,fullname,dob,phone} = signupValues;
+
+    const response = await fetch("", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "post",
+      body: {
+        email,
+        password,
+        fullname,dob,phone
+      },
+    });
+    const data = await response.json();
+    if(data.status==="success"){
+        localStorage.setItem("authToken",data.authToken)
+    }
+  }
+
     return (
         <div className="signupBody">
           <div className='wrapper'>
@@ -64,9 +87,9 @@ const Signp = () => {
                         <input type={passwordVisible ? "text" : "password"} name="confirmpassword"  value={signupValues.confirmpassword} onChange={inputHandler}/>
                         <label>Confirm Password</label>
                     </div>
-                    <button type="submit" className='btn' onClick={()=>{console.log(signupValues.fullname);}}>SignUp</button>
+                    <button type="submit" className='btn' onClick={signup}>SignUp</button>
                     <div className="register-login">
-                        <p>Already have an account?<a href="#" className="register-link">Login</a></p>
+                        <p>Already have an account?<a href="signin" className="register-link">Login</a></p>
                     </div>
                 </form>
             </div>

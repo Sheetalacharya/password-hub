@@ -1,4 +1,5 @@
-import React, { useState, useRef, useContext } from "react";
+import React, { useState, useRef, useContext, useEffect } from "react";
+import {useNavigate} from 'react-router-dom'
 import "../Stylesheets/home.css";
 import Navbar from "../component/Navbar";
 import SavedPass from "../component/SavedPass";
@@ -6,7 +7,7 @@ import PopupForCustom from "../component/PopupForCustom";
 import PopupForRandom from "../component/PopupForRandom";
 import {passwordcontext} from "../context/passwordState"
 
-export default function Home() {
+export default function Home(props) {
   const [popupForCustom, setPopupForCustom] = useState(false);
   const [popupForRandom, setPopupForRandom] = useState(false);
   const [titleInp,setTitleInp]=useState("")
@@ -14,9 +15,16 @@ export default function Home() {
   const [copied,setCopied]=useState(false)
 
   const titleInputField=useRef()
+  const navigate=useNavigate()
 
   const passwordState=useContext(passwordcontext)
   const {}=passwordState
+
+  useEffect(()=>{
+    if(!props.isloggedin){
+      // navigate("/signin") 
+    }
+  })
 
   function closePopup(type, val) {
     console.log(type, val);
