@@ -1,16 +1,15 @@
-// password schema 
 const mongoose=require('mongoose')
 
 const PasswordSchema=new mongoose.Schema({
     userId:{
         required:true,
-        type:number
+        type:String
     },
-    title:{
+    title:{ 
         required:true,
         type:String
     },
-    generatedPass:{
+    password:{
         required:true,
         type:String
     },
@@ -20,5 +19,5 @@ const PasswordSchema=new mongoose.Schema({
         default:Date.now
     }
 })
-const Password=mongoose.model("password",PasswordSchema)
-module.exports=Password
+const password=mongoose.model("password",PasswordSchema)
+module.exports=password

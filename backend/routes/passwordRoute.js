@@ -2,36 +2,29 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-const User = require("../model/Password");
+const Password = require("../model/passwordSchema");
 const router = express.Router();
 
-const secretKey = "PasswordHub@#$";
+const secretKey = "process.env.SECRET_KEY";
 
 // Random password generation
 router.post("/randompassword", async (req, res) => {
     const { length, useLowercase, useUppercase, useNumbers, useSpecial } = req.body;
   try {
-        const customPassword = generateRandomPassword(length, useLowercase, useUppercase, useNumbers, useSpecial);
-        res.json({ randomPassword });
+        const randomPass = generateRandomPassword(length, useLowercase, useUppercase, useNumbers, useSpecial);
+        res.status(200).json({ status:"success",message:randomPass });
   } catch (e) {
-        console.error('Error generating password:', error);
         res.status(500).json({ error: 'An error occurred while generating the password.' });
   }
 });
 
 // Customized password generation
 router.post('/custompassword', async (req, res) => {
-    const { userId, length, useLowercase, useUppercase, useNumbers, useSpecial } = req.body;
-  
-    try {
-      const user = await User.findById(userId);
-      if (!user) {
-        return res.status(404).json({ error: 'User not found' });
-      }
-
-      const { name, dob, email, phone } = user;
-  
-      const customPassword = generateCustomPassword(length, name, dob, email, phone, useName, useDOB, useEmail, usePhone, useLowercase, useUppercase, useNumbers, useSpecial);
+    const {length,name,dob,email,phone,useName,usePhone,useEmail,useDOB,useNumbers,useLowercase,useUppercase,
+        useSpecial,others} = req.body;
+  try{
+      const customPassword = generateCustomPassword(length,name,dob,email,phone,useName,usePhone,useEmail,useDOB,useNumbers,useLowercase,useUppercase,
+        useSpecial,others);
   
       res.json({ customPassword });
     } catch (error) {
@@ -44,9 +37,7 @@ router.post('/custompassword', async (req, res) => {
 // Save password
   router.post('/savepassword', async (req, res) => {
     const { userId, title, password } = req.body;
-  
     const newPassword = new Password({userId, title, password});
-  
     try {
       await newPassword.save();
       res.status(201).json({ message: 'Password saved successfully' });
@@ -103,7 +94,9 @@ function getRandomCharacter(characterSet) {
 
 
 //Function to generate customized password
-function generateCustomPassword(length = 10, name = '', dob = '', email = '', phone = '', useName = false, usePhone = false, useEmail = false, useDOB = false, useNumbers= false, useLowercase = false, useUppercase = false, useSpecial = false, others = '') {
+// length,name,dob,email,phone,useName,usePhone,useEmail,useDOB,useNumbers,useLowercase,useUppercase,
+        // useSpecial,others
+function generateCustomPassword(length = 10, name = '', dob = '', email = '', phone = '', useName = false, usePhone = false, useEmail = false, useDOB = false, useNumbers= false, useLowercase = false, useUppercase = false, useSpecial = false, others = []) {
     const lowercaseChars = 'abcdefghijklmnopqrstuvwxyz';
     const uppercaseChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     const numberChars = '0123456789';

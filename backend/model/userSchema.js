@@ -8,7 +8,7 @@ const UserSchema=new mongoose.Schema({
     },
     dob:{
         required:true,
-        type:Date
+        type:String
     },
     phone:{
         required:true,
