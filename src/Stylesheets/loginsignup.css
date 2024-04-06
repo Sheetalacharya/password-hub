@@ -11,10 +11,10 @@
       display: flex;
       flex-direction: column;
       margin: auto;
-      margin-top: 150px;
-      padding-bottom: 30px;
-      width: 500px;
-      height: 750px;
+      margin-top: 20px;
+      padding-bottom: 20px;
+      width: 400px;
+      height: 540px;
       background-color: rgba(255, 255, 255, 0.3); 
       border: 2px solid rgba(255, 255, 255, 0.5);
       border-radius: 20px;
@@ -24,19 +24,20 @@
     
     .wrapper .form-box {
       width: 100%;
-      padding: 40px;
+      padding: 30px;
     }
     
     .form-box h2 {
-      font-size: 2em;
+      font-size: 1.5em;
       color: #162938;
       text-align: center;
+      margin-top: 20px;
     }
     
     .inputRegister {
       position: relative;
       width: 100%;
-      height: 50px;
+      height: 20px;
       border-bottom: 2px solid #162936;
       margin: 30px 0;
     }
@@ -46,7 +47,7 @@
       top: 50%;
       transform: translateY(-50%); 
       left: 5px;
-      font-size: 1em;
+      font-size: 0.8em;
       color: #162936;
       font-weight: 500;
       pointer-events: none;
@@ -66,13 +67,13 @@
       top: 40%;
       right: 8px;
       transform: translateY(-50%); 
-      width: 20px;
-      height: 20px;
+      width: 15px;
+      height: 15px;
     }
     
     .inputRegister input:focus + label,
   .inputRegister input:not(:placeholder-shown) + label {
-      top: -3px; 
+      top: -9px; 
       
       color: #6b6b6b; 
   }
@@ -86,7 +87,7 @@
       border-radius: 6px;
       cursor: pointer;
       color:#fff;
-      font-size: 1em;
+      font-size: 0.8em;
       font-weight: 500;
   
   }
@@ -96,10 +97,10 @@
   }
   
   .register-login{
-      font-size: .9em;
+      font-size: .7em;
       color: #162938;
       text-align: center;
-      margin: 25px 0 10px;
+      margin: 10px 0 10px;
       font-weight: 500;
   }
   .register-login p a{
@@ -115,7 +116,7 @@
   /* */
   /*  */
 
-  @media screen and (max-width: 300px) {
+  @media screen and (max-width: 200px) {
     .wrapper {
         margin-top: 30px; 
         width: 90%; 
@@ -146,7 +147,7 @@
 
 @media screen and (max-width: 500px) {
     .wrapper {
-        margin-top: 50px; 
+        margin-top: 30px; 
         width: 90%; 
     }
 
@@ -162,7 +163,11 @@
         display: none; 
     }
 }
-
+@media screen and (max-width: 941px){
+  .wrapper{
+    margin-top: 20px;
+  }
+} 
 
 /* Styling for login page */
 
@@ -180,8 +185,8 @@
   margin: auto;
   margin-top: 100px;
   padding-bottom: 30px;
-  width: 500px;
-  height: 450px;
+  width: 400px;
+  height: 400px;
   background-color: rgba(255, 255, 255, 0.3); 
   border: 2px solid rgba(255, 255, 255, 0.5);
   border-radius: 20px;
@@ -195,7 +200,7 @@
 .inputlogin {
   position: relative;
   width: 100%;
-  height: 50px;
+  height: 40px;
   border-bottom: 2px solid #162936;
   margin: 30px 0;
 }
@@ -205,7 +210,7 @@
   top: 50%;
   transform: translateY(-50%); 
   left: 5px;
-  font-size: 1em;
+  font-size: 0.9em;
   color: #162936;
   font-weight: 500;
   pointer-events: none;
@@ -271,7 +276,7 @@
 @media screen and (max-width: 500px) {
   .wrapper1 {
       margin-top: 100px; 
-      width: 90%; 
+      width: 80%; 
   }
 
   .form-box {
@@ -279,16 +284,16 @@
   }
 
   .inputlogin {
-      margin: 15px 0; 
+      margin: 30px 0; 
   }
 
   .inputlogin input {
-      padding-right: 20px; 
+      padding-right: 30px; 
   }
 
   .btn {
-      height: 40px; 
-      font-size: 0.9em;
+      height: 42px; 
+      font-size: 0.7em;
   }
 
   .register-login {
