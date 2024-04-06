@@ -1,39 +1,52 @@
 import React, { useState, useRef, useContext, useEffect } from "react";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 import "../Stylesheets/home.css";
 import Navbar from "../component/Navbar";
 import SavedPass from "../component/SavedPass";
 import PopupForCustom from "../component/PopupForCustom";
 import PopupForRandom from "../component/PopupForRandom";
-import {passwordcontext} from "../context/passwordState"
+import { passwordcontext } from "../context/passwordState";
 
 export default function Home(props) {
+  const passwordState = useContext(passwordcontext);
+  const {setBtnSelected,generatedPass,setGeneratedPass ,titleInp, setTitleInp,savePassword,passwords} = passwordState;
+  
+
   const [popupForCustom, setPopupForCustom] = useState(false);
   const [popupForRandom, setPopupForRandom] = useState(false);
-  const [titleInp,setTitleInp]=useState("")
-  const [passwordOut,setPasswordOut]=useState("")
-  const [copied,setCopied]=useState(false)
+  
+  const [copied, setCopied] = useState(false);
 
-  const titleInputField=useRef()
-  const navigate=useNavigate()
+  const titleInputField = useRef();
+  const navigate = useNavigate();
 
-  const passwordState=useContext(passwordcontext)
-  const {}=passwordState
 
-  useEffect(()=>{
-    if(!props.isloggedin){
-      // navigate("/signin") 
+  useEffect(() => {
+    if (!props.isloggedin) {
+      // navigate("/signin")
     }
-  })
+  });
 
   function closePopup(type, val) {
-    console.log(type, val);
     type === "custom" ? setPopupForCustom(val) : setPopupForRandom(val);
   }
 
-  function copyToClipboard(){
-    navigator.clipboard.writeText(passwordOut)
-    setCopied(true)
+  function copyToClipboard() {
+    navigator.clipboard.writeText(generatedPass);
+    setCopied(true);
+  }
+
+  function customBtnClick() {
+    popupForCustom ? setPopupForCustom(false) : setPopupForCustom(true);
+    setBtnSelected("custom")
+  }
+  function randomBtnClick() {
+    popupForRandom ? setPopupForRandom(false) : setPopupForRandom(true);
+    setBtnSelected("random")
+  }
+
+  function handleSaveBtn(){
+    savePassword({title:titleInp,password:generatedPass},"auth")
   }
 
   return (
@@ -47,30 +60,16 @@ export default function Home(props) {
             }}
           >
             <div className="mainoptions">
-              <button
-                onClick={() =>
-                  popupForCustom
-                    ? setPopupForCustom(false)
-                    : setPopupForCustom(true)
-                }
-              >
+              <button onClick={customBtnClick}>
                 Get password by user Input
               </button>
-              <button
-                onClick={() =>
-                  popupForRandom
-                    ? setPopupForRandom(false)
-                    : setPopupForRandom(true)
-                }
-              >
-                Get random password
-              </button>
+              <button onClick={randomBtnClick}>Get random password</button>
             </div>
             <input
               type="text"
               id="title-input"
               placeholder="Enter title of site"
-              onChange={e=>setTitleInp(e.target.value)}
+              onChange={(e) => setTitleInp(e.target.value)}
               value={titleInp}
               ref={titleInputField}
             />
@@ -79,21 +78,33 @@ export default function Home(props) {
                 type="text"
                 id="password-output"
                 placeholder="Your password will show here"
-                value={passwordOut}
-                onChange={e=>setPasswordOut(e.target.value)}
+                value={generatedPass}
+                onChange={(e) => setGeneratedPass(e.target.value)}
               />
-              <button id="copyPasswordBtn" onClick={copyToClipboard}><i className={`fa-${copied?"solid":"regular"} fa-copy`}></i></button>
+              <button id="copyPasswordBtn" onClick={copyToClipboard}>
+                <i className={`fa-${copied ? "solid" : "regular"} fa-copy`}></i>
+              </button>
             </div>
             <div>
               <button id="regenerateBtn">Regenerate</button>
-              <button id="saveBtn">Save</button>
+              <button id="saveBtn" onClick={handleSaveBtn}>Save</button>
             </div>
           </form>
         </div>
-        <h2>Saved Passwords</h2>
-        <SavedPass />
-        <button className="addPass" onClick={()=>titleInputField.current.focus()}><i className="fa-regular fa-plus"></i></button>
+       {passwords &&  <h2>Saved Passwords</h2>}
+
+      <SavedPass/>
+
+        {/* to add password */}
+        <button
+          className="addPass"
+          onClick={() => titleInputField.current.focus()}
+        >
+          <i className="fa-regular fa-plus"></i>
+        </button>
       </div>
+
+      {/* popup */}
       {popupForCustom && (
         <PopupForCustom
           closePopup={closePopup}

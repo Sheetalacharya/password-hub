@@ -6,10 +6,8 @@ export default function Navbar() {
 
   const closeProfileList=useRef()
 
-  const handleListVisibility=()=>{
-    console.log("toggle");
-    setDisplayProfileList((prev)=>!prev)
-  }
+  const handleListVisibility=()=>setDisplayProfileList((prev)=>!prev)
+  
 
   useEffect(() => {
     function handler(e) {

@@ -27,7 +27,6 @@ const Signin = () => {
 
   async function signin(e) {
     e.preventDefault();
-    console.log(signinValues);
     const { email, password } = signinValues;
 
     const response = await fetch("", {

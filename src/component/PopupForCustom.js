@@ -1,5 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState,useContext } from "react";
 import "../Stylesheets/popupForCustom.css";
+import { passwordcontext } from "../context/passwordState";
 
 export default function PopupForCustom(props) {
   const closePopup = useRef();
@@ -13,6 +14,9 @@ export default function PopupForCustom(props) {
   const[lengthInp,setlen]=useState(4)
   const[otherWords,setOther]=useState("")
 
+
+const passwordState=useContext(passwordcontext)
+const {generateCustomPassword}=passwordState
 
   useEffect(() => {
     function handler(e) {
@@ -39,10 +43,29 @@ export default function PopupForCustom(props) {
     console.log({otherWords});
   }
 
+function sendToGenerate(){
+  printd()
+  let otherWordsArr=otherWords.split(",")
+  console.log(otherWordsArr);
+  const data={
+    nameCheck,
+phoneCheck,
+emailCheck,
+dobCheck,
+uppercaseCheck,
+lowercaseCheck,
+splCharCheck,
+lengthInp,
+otherWords:otherWordsArr
+  }
+  generateCustomPassword(data)
+  props.closePopup("custom", false);
+}
+
   return (
     <div className="popup-container">
       <div className="popupSection" ref={closePopup}>
-        <p>What do you want to include in your password ?</p>
+        <p>What do you want to include in your custom password ?</p>
         <ul>
           <li>
             <label htmlFor={"nameCB"}>Name</label>
@@ -88,7 +111,7 @@ export default function PopupForCustom(props) {
             ></textarea>
           </li>
         </ul>
-        <button onClick={printd}>Generate</button>
+        <button onClick={sendToGenerate}>Generate</button>
       </div>
     </div>
   );

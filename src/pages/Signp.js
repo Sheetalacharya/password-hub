@@ -29,7 +29,6 @@ const Signp = () => {
    
    async function signup(e) {
     e.preventDefault();
-    console.log(signupValues);
     const { email, password,fullname,dob,phone} = signupValues;
 
     const response = await fetch("", {

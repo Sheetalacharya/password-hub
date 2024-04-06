@@ -1,8 +1,14 @@
-import React, { useEffect, useRef ,useState} from "react";
+import React, { useEffect, useRef ,useState,useContext} from "react";
 import "../Stylesheets/popupForCustom.css";
+import { passwordcontext } from "../context/passwordState";
+
 
 export default function PopupForRandom(props) {
+
   const closeRandomPopup = useRef();
+
+  const passwordState=useContext(passwordcontext)
+const {generateRandomPassword}=passwordState
 
   const[lettersCheck,setLettersCheck]=useState(false)
   const[numbersCheck,setNumbersCheck]=useState(false)
@@ -10,6 +16,8 @@ export default function PopupForRandom(props) {
   const[lowercaseCheck,setLowerCheck]=useState(false)
   const[splCharCheck,setSplCheck]=useState(false)
   const[lengthInp,setlen]=useState(4)
+
+
 
   useEffect(() => {
     function handler(e) {
@@ -36,6 +44,18 @@ console.log({splCharCheck})
 console.log({lengthInp})
   }
 
+  function sendToGenerate(){
+    printd()
+    const data={
+      numbersCheck,
+uppercaseCheck,
+lowercaseCheck,
+splCharCheck,
+lengthInp  ,
+    }
+    generateRandomPassword(data)
+    props.closePopup("random", false);
+  }
 
   return (
     <div className="popup-container">
@@ -43,7 +63,7 @@ console.log({lengthInp})
         className="popupSection randomInpContainer"
         ref={closeRandomPopup}
       >
-        <p>What do you want to include in your password ?</p>
+        <p>What do you want to include in your random password ?</p>
         <ul>
           <li>
             <label htmlFor="letterRB">Letters</label>
@@ -70,7 +90,7 @@ console.log({lengthInp})
             <input type="number" name="" id="lengthRB" value={lengthInp} onChange={e=>setlen(e.target.value)} />
           </li>
         </ul>
-        <button onClick={printd}>Generate</button>
+        <button onClick={sendToGenerate}>Generate</button>
       </div>
     </div>
   );
