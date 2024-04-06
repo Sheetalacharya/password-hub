@@ -5,14 +5,7 @@ import SavedPasscard from "./SavedPasscard";
 export default function SavedPass() {
   return (
     <div className="savedPass-container">
-      <SavedPasscard/>
-      <SavedPasscard/>
-      <SavedPasscard/>
-      <SavedPasscard/>
-      <SavedPasscard/>
-      <SavedPasscard/>
-      <SavedPasscard/>
-      <SavedPasscard/>
+      <SavedPasscard title={"hello"} password={"password"}/>
     </div>
   );
 }

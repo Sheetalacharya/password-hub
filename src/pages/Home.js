@@ -1,18 +1,33 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
 import "../Stylesheets/home.css";
 import Navbar from "../component/Navbar";
 import SavedPass from "../component/SavedPass";
 import PopupForCustom from "../component/PopupForCustom";
 import PopupForRandom from "../component/PopupForRandom";
+import {passwordcontext} from "../context/passwordState"
 
 export default function Home() {
   const [popupForCustom, setPopupForCustom] = useState(false);
   const [popupForRandom, setPopupForRandom] = useState(false);
+  const [titleInp,setTitleInp]=useState("")
+  const [passwordOut,setPasswordOut]=useState("")
+  const [copied,setCopied]=useState(false)
+
+  const titleInputField=useRef()
+
+  const passwordState=useContext(passwordcontext)
+  const {}=passwordState
 
   function closePopup(type, val) {
     console.log(type, val);
     type === "custom" ? setPopupForCustom(val) : setPopupForRandom(val);
   }
+
+  function copyToClipboard(){
+    navigator.clipboard.writeText(passwordOut)
+    setCopied(true)
+  }
+
   return (
     <>
       <Navbar />
@@ -47,14 +62,19 @@ export default function Home() {
               type="text"
               id="title-input"
               placeholder="Enter title of site"
+              onChange={e=>setTitleInp(e.target.value)}
+              value={titleInp}
+              ref={titleInputField}
             />
             <div>
               <input
                 type="text"
                 id="password-output"
                 placeholder="Your password will show here"
+                value={passwordOut}
+                onChange={e=>setPasswordOut(e.target.value)}
               />
-              <button id="copyPasswordBtn"><i class="fa-regular fa-copy"></i></button>
+              <button id="copyPasswordBtn" onClick={copyToClipboard}><i className={`fa-${copied?"solid":"regular"} fa-copy`}></i></button>
             </div>
             <div>
               <button id="regenerateBtn">Regenerate</button>
@@ -64,7 +84,7 @@ export default function Home() {
         </div>
         <h2>Saved Passwords</h2>
         <SavedPass />
-        <button className="addPass"><i class="fa-regular fa-plus"></i></button>
+        <button className="addPass" onClick={()=>titleInputField.current.focus()}><i className="fa-regular fa-plus"></i></button>
       </div>
       {popupForCustom && (
         <PopupForCustom

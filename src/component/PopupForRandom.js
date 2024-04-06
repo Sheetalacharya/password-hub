@@ -1,8 +1,16 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef ,useState} from "react";
 import "../Stylesheets/popupForCustom.css";
 
 export default function PopupForRandom(props) {
   const closeRandomPopup = useRef();
+
+  const[lettersCheck,setLettersCheck]=useState(false)
+  const[numbersCheck,setNumbersCheck]=useState(false)
+  const[uppercaseCheck,setUpperCheck]=useState(false)
+  const[lowercaseCheck,setLowerCheck]=useState(false)
+  const[splCharCheck,setSplCheck]=useState(false)
+  const[lengthInp,setlen]=useState(4)
+
   useEffect(() => {
     function handler(e) {
       if (
@@ -18,6 +26,17 @@ export default function PopupForRandom(props) {
     };
     // eslint-disable-next-line
   }, []);
+
+  function printd(){
+    console.log({lettersCheck})
+console.log({numbersCheck})
+console.log({uppercaseCheck})
+console.log({lowercaseCheck})
+console.log({splCharCheck})
+console.log({lengthInp})
+  }
+
+
   return (
     <div className="popup-container">
       <div
@@ -28,30 +47,30 @@ export default function PopupForRandom(props) {
         <ul>
           <li>
             <label htmlFor="letterRB">Letters</label>
-            <input type="checkbox" name="randomFiedldInp" id="letterRB" />
+            <input type="checkbox" name="randomFiedldInp" id="letterRB" checked={lettersCheck} onChange={e=>setLettersCheck(e.target.checked)} />
           </li>
           <li>
             <label htmlFor="numberRB">Numbers</label>
-            <input type="checkbox" name="randomFiedldInp" id="numberRB" />
+            <input type="checkbox" name="randomFiedldInp" id="numberRB" checked={numbersCheck} onChange={e=>setNumbersCheck(e.target.checked)}  />
           </li>
           <li>
             <label htmlFor="uppercaseRB">UpperCase</label>
-            <input type="checkbox" name="randomFiedldInp" id="uppercaseRB" />
+            <input type="checkbox" name="randomFiedldInp" id="uppercaseRB" checked={uppercaseCheck} onChange={e=>setUpperCheck(e.target.checked)} />
           </li>
           <li>
             <label htmlFor="lowercaseRB">LowerCase</label>
-            <input type="checkbox" name="randomFiedldInp" id="lowercaseRB" />
+            <input type="checkbox" name="randomFiedldInp" id="lowercaseRB" checked={lowercaseCheck} onChange={e=>setLowerCheck(e.target.checked)} />
           </li>
           <li>
             <label htmlFor="splCharRB">Special Characters</label>
-            <input type="checkbox" name="randomFiedldInp" id="splCharRB" />
+            <input type="checkbox" name="randomFiedldInp" id="splCharRB" checked={splCharCheck} onChange={e=>setSplCheck(e.target.checked)}/>
           </li>
           <li>
             <label htmlFor="lengthRB">Length</label>
-            <input type="number" name="" id="lengthRB" />
+            <input type="number" name="" id="lengthRB" value={lengthInp} onChange={e=>setlen(e.target.value)} />
           </li>
         </ul>
-        <button>Generate</button>
+        <button onClick={printd}>Generate</button>
       </div>
     </div>
   );
