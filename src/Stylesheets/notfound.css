@@ -1,0 +1,12 @@
+.notfound-container{
+    text-align: center;
+    margin-top: 50px;
+}
+.notfound-container h1{
+    font-size: 200px;
+    color: red;
+}
+.notfound-container h2{
+    font-size: 40px;
+    color:black;
+}

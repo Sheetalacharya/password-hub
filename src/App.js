@@ -4,6 +4,7 @@ import "./App.css";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signp";
 import Home from "./pages/Home";
+import NotFound from "./pages/NotFound";
 
 import PasswordState from "./context/passwordState";
 
@@ -26,7 +27,9 @@ function App() {
             <Route path="/" element={<Home isloggedin={isloggedin} />} />
             <Route path="/signin" element={<Signin />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="*" element={<NotFound/>}/>
           </Routes>
+          
         </BrowserRouter>
       </PasswordState>
     </div>
