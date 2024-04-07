@@ -29,8 +29,8 @@ function App() {
             <Route path="/signin" element={<Signin setIsloggedin={setIsloggedin} />} />
             <Route path="/signup" element={<Signup setIsloggedin={setIsloggedin} />} />
             <Route path="/profile" element={<ProfilePage />} />
+            <Route path="*" element={<NotFound/>} />
           </Routes>
-          
         </BrowserRouter>
       </PasswordState>
     </div>
