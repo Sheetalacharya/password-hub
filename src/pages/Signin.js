@@ -1,40 +1,72 @@
 import React, { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 
 import "../Stylesheets/loginsignup.css";
 
-
-
-const Signin = () => {
-  
-
+const Signin = (props) => {
   const [signinValues, setSigninValues] = useState({
     email: "",
     password: "",
   });
- 
+  const [eyeBtnShow, setEyeBtnShow] = useState(false);
+  const [errorMsg, setErrMsg] = useState("");
+  const navigate = useNavigate();
+
   const inputHandler = (e) => {
     setSigninValues({ ...signinValues, [e.target.name]: e.target.value });
   };
+  function validator() {
+    const { email, password } = signinValues;
+    if (!email || !password) {
+      showErrorMessage("Invalid credential");
+      return false;
+    }
+    if (email === "" || email === " " || password === "" || password === " ") {
+      showErrorMessage("Invalid credential");
+      return false;
+    }
+    if (!email.includes("@") || !email.includes(".")) {
+      showErrorMessage("Invalid credential");
+      return false;
+    }
+    if (password.length < 6) {
+      showErrorMessage("Invalid credential");
+      return false;
+    }
+    return true;
+  }
+
+  function showErrorMessage(message){
+    setErrMsg(message)
+    setTimeout(()=>{
+      setErrMsg("")
+    },3000)
+  }
 
   async function signin(e) {
     e.preventDefault();
-    console.log(signinValues);
     const { email, password } = signinValues;
-
-    const response = await fetch("", {
+    if(!validator()) return
+    const url = "http://localhost:3001";
+    const response = await fetch(`${url}/auth/api/signin`, {
       headers: {
         "Content-Type": "application/json",
       },
       method: "post",
-      body: {
+      body: JSON.stringify({
         email,
         password,
-      },
+      }),
     });
     const data = await response.json();
-    if(data.status==="success"){
-        localStorage.setItem("authToken",data.authToken)
+    console.log(data);
+    if (data.status === "success") {
+      localStorage.setItem("authToken", data.message);
+      props.setIsloggedin(true);
+      navigate("/");
+    }
+    else{
+      showErrorMessage(data.message)
     }
   }
 
@@ -43,29 +75,36 @@ const Signin = () => {
       <div className="wrapper1">
         <div className="form-box login">
           <h2>Login</h2>
-          <form action="/">
+          <form onSubmit={(e) => e.preventDefault()} >
             <div className="inputlogin">
-             
               <input
                 type="email"
                 name="email"
                 value={signinValues.email}
-                onChange={inputHandler} placeholder="Email"
+                onChange={inputHandler}
+                placeholder="Email"
+                autoComplete="off"
               />
-              
             </div>
             <div className="inputlogin">
-             
-      
               <input
-                type="password"
+                type={`${eyeBtnShow ? "text" : "password"}`}
                 name="password"
                 value={signinValues.password}
-                onChange={inputHandler} placeholder="Password"
+                onChange={inputHandler}
+                placeholder="Password"
               />
-              
+              <button
+                className="eyeBtn"
+                onClick={() => setEyeBtnShow((prev) => !prev)}
+              >
+                <i
+                  className={`fa-solid fa-eye${eyeBtnShow ? "" : "-slash"}`}
+                ></i>
+              </button>
             </div>
-            <button type="submit" className="btn" onClick={signin}>
+            <p className="errorText">{errorMsg}</p>
+            <button className="btn" onClick={signin}>
               Login
             </button>
             <div className="register-login">

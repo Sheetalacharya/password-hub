@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 
 import PasswordState from "./context/passwordState";
+import ProfilePage from "./pages/ProfilePage";
 
 function App() {
   const [isloggedin,setIsloggedin]=useState(false)
@@ -14,7 +15,7 @@ function App() {
 
   useEffect(()=>{
     setAuthToken(localStorage.getItem("authToken"))
-    if(authToken)setIsloggedin(true)
+    if(authToken) return setIsloggedin(true)
     else setIsloggedin(false)
   },[authToken])
 
@@ -24,10 +25,10 @@ function App() {
       <PasswordState>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Home isloggedin={isloggedin} />} />
-            <Route path="/signin" element={<Signin />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="*" element={<NotFound/>}/>
+            <Route path="/" element={<Home isloggedin={isloggedin} setIsloggedin={setIsloggedin} />} />
+            <Route path="/signin" element={<Signin setIsloggedin={setIsloggedin} />} />
+            <Route path="/signup" element={<Signup setIsloggedin={setIsloggedin} />} />
+            <Route path="/profile" element={<ProfilePage />} />
           </Routes>
           
         </BrowserRouter>

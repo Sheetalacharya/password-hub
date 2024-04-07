@@ -26,9 +26,6 @@
     flex-direction: column;
     border-radius: 10px;
 }
-.inputGen-container>form button{
-    cursor: pointer;
-}
 .inputGen-container>form>.mainoptions{
     width: 100%;
     display: flex;
@@ -43,15 +40,15 @@
     border-radius: 10px;
 }
 
-#title-input,#password-output{
+#title-input,#password-output,#username-input{
     width:70%;
     height: 35px;
     border-radius: 5px;
 }
-#title-input::placeholder,#password-output::placeholder{
+#title-input::placeholder,#password-output::placeholder,#username-input::placeholder{
     padding-left: 10px;
 }
-.inputGen-container>form :nth-child(3){
+.inputGen-container>form :nth-child(4){
     width: 100%;
     height: max-content;
     display: flex;
@@ -60,11 +57,20 @@
     position: relative;
 }
 
+#passwordEyeBtn{
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    right: 16%;
+    background-color: transparent;
+    outline: none;
+    border: none;
+}
 #copyPasswordBtn{
     width: 30px;
     height: 30px;
     position: absolute;
-    right: 15%;
+    right: 9%;
 }
 .inputGen-container>form>div:last-child{
     width: 100%;
@@ -99,4 +105,26 @@ h2{
     height: 50px;
     border-radius: 50%;
     cursor: pointer;
+}
+
+@media screen and (max-width:650px) {
+    .inputGen-container>form{
+        width: 80vw;
+        height: 55vh;
+    }
+    .inputGen-container .mainoptions{
+        flex-direction: column;
+        align-items: center;
+        gap:10px;
+        margin: 10px 0;
+    }
+    #title-input, #password-output, #username-input{
+        width: 83%;
+    }
+}
+@media screen and (max-width:400px) {
+    .inputGen-container>form{
+        width: 90vw;
+        height: 55vh;
+    }
 }

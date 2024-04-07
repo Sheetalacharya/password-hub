@@ -1,20 +1,18 @@
-import React, { useRef, useState,useEffect } from 'react'
-import "../Stylesheets/navbar.css"
+import React, { useRef, useState, useEffect } from "react";
+import "../Stylesheets/navbar.css";
+import { useNavigate } from "react-router-dom";
 
-export default function Navbar() {
-  const[displayProfileList,setDisplayProfileList]=useState(false)
+export default function Navbar(props) {
+  const [displayProfileList, setDisplayProfileList] = useState(false);
+  const closeProfileList = useRef();
+  const navigate = useNavigate();
 
-  const closeProfileList=useRef()
-
-  const handleListVisibility=()=>{
-    console.log("toggle");
-    setDisplayProfileList((prev)=>!prev)
-  }
+  const handleListVisibility = () => setDisplayProfileList((prev) => !prev);
 
   useEffect(() => {
     function handler(e) {
       if (displayProfileList && !closeProfileList.current.contains(e.target)) {
-        setDisplayProfileList(false)
+        setDisplayProfileList(false);
       }
     }
     document.addEventListener("mousedown", handler);
@@ -26,18 +24,30 @@ export default function Navbar() {
 
   return (
     <nav>
-        <div className="logo">
-            Password Hub
-        </div>
-        <div className='profileBtn'>
-        <button className='profileIcon' onClick={handleListVisibility}><i className="fa-solid fa-user"></i> </button>
-        </div>
-        {
-          displayProfileList && (<ul className='profileList' ref={closeProfileList}>
-          <li><button>View Profile</button></li>
-          <li><button>Logout</button></li>
-        </ul>)
-        }
+      <div className="logo">Password Hub</div>
+      <div className="profileBtn">
+        <button className="profileIcon" onClick={handleListVisibility}>
+          <i className="fa-solid fa-user"></i>{" "}
+        </button>
+      </div>
+      {displayProfileList && (
+        <ul className="profileList" ref={closeProfileList}>
+          <li>
+            <button onClick={()=>navigate("/profile")}>View Profile</button>
+          </li>
+          <li>
+            <button
+              onClick={() => {
+                localStorage.removeItem("authToken");
+                props.setIsloggedin(false);
+                navigate("/signup")
+              }}  
+            >
+              Logout
+            </button>
+          </li>
+        </ul>
+      )}
     </nav>
-  )
+  );
 }

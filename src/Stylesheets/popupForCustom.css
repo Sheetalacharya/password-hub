@@ -10,6 +10,7 @@
     justify-content: center;
     overflow-y: scroll;
     overflow-x: hidden;
+    z-index: 1;
 }
 .popup-container::-webkit-scrollbar{
     display: none;
@@ -113,4 +114,20 @@
     padding: 10px 25px;
     border-radius: 10px;
 }
+.errorMsg-gen{
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: red;
+}
 
+@media screen and (max-width:650px) {
+    .popup-container{
+        padding: 20px;
+    }
+    .popupSection{
+        margin-top: 35%;
+        width: 80%;
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+}
