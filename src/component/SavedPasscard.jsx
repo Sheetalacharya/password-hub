@@ -25,8 +25,8 @@ export default function SavedPasscard(props) {
     setSavedPass(password);
   }, [passwords]);
 
-  function copyToClipboard() {
-    navigator.clipboard.writeText(savedPass);
+  function copyToClipboard(data) {
+    navigator.clipboard.writeText(data);
     setCopied(true);
   }
 
@@ -58,7 +58,7 @@ export default function SavedPasscard(props) {
         <button className="eyeBtn cardIconBtn" onClick={()=>setShowUName(prev=>!prev)}>
           <i className={`fa-solid fa-eye${showUname?"":"-slash"}`}></i>
         </button>
-        <button className="copyBtn cardIconBtn">
+        <button className="copyBtn cardIconBtn" onClick={()=>copyToClipboard(username)}>
           <i className="fa-solid fa-copy"></i>
         </button> 
       </div>
@@ -69,7 +69,7 @@ export default function SavedPasscard(props) {
         <button className="eyeBtn cardIconBtn" onClick={()=>setShowPass(prev=>!prev)}>
           <i className={`fa-solid fa-eye${showPass?"":"-slash"}`}></i>
         </button>
-        <button className="copyBtn cardIconBtn" onClick={copyToClipboard}>
+        <button className="copyBtn cardIconBtn" onClick={()=>copyToClipboard(savedPass)}>
           <i className="fa-solid fa-copy"></i>
         </button>
       </div> 

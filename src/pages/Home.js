@@ -22,8 +22,12 @@ export default function Home(props) {
     selectedForGen,
   } = passwordState;
 
+  const titleInputField = useRef();
+  const navigate = useNavigate();
+
   useEffect(()=>{
     let authToken=localStorage.getItem("authToken")
+    if(!authToken)return navigate("/signin")
     fetchAllPassword(authToken)
   },[])
 
@@ -32,8 +36,7 @@ export default function Home(props) {
   const [passwordVisble, setPasswordVisible] = useState(false);
   const [copied, setCopied] = useState(false);
 
-  const titleInputField = useRef();
-  const navigate = useNavigate();
+
 
   useEffect(() => {
     if (!props.isloggedin) {
@@ -59,7 +62,6 @@ export default function Home(props) {
   }
 
   function handleSaveBtn() {
-    console.log(titleUnameInp, generatedPass);
     let authToken=localStorage.getItem("authToken")
     savePassword(
       {
@@ -69,6 +71,7 @@ export default function Home(props) {
       },
       authToken
     );
+    
   }
 
   return (
@@ -142,7 +145,7 @@ export default function Home(props) {
             </div>
           </form>
         </div>
-        {passwords && <h2>Saved Passwords</h2>}
+        {passwords.length>0 && <h2>Saved Passwords</h2>}
 
         <SavedPass />
 

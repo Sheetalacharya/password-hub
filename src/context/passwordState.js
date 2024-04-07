@@ -125,7 +125,10 @@ export default function PasswordState(props) {
     });
     const data = await response.json();
     if (data.status !== "error") {
-      return setPasswords(passwords.concat(data.message).reverse());
+
+      setTitleUnameInp({title:"",username:""})
+      setGeneratedPass("")
+    setPasswords(passwords.concat(data.message).reverse());
     }    
   }
 

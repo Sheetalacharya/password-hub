@@ -38,6 +38,16 @@
       text-align: center;
       margin-top: 20px;
     }
+    .inputRegister>.eyeBtn,
+    .inputlogin>.eyeBtn{
+      background-color: transparent;
+      border:none;
+      outline: none;
+    }
+    .inputRegister>.eyeBtn>i,
+    .inputlogin>.eyeBtn>i{
+      font-size: 15px;
+    }
     
     .inputRegister {
       position: relative;
