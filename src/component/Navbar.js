@@ -40,8 +40,8 @@ export default function Navbar(props) {
               onClick={() => {
                 localStorage.removeItem("authToken");
                 props.setIsloggedin(false);
-                navigate("/")
-              }}
+                navigate("/signup")
+              }}  
             >
               Logout
             </button>

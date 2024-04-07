@@ -14,7 +14,7 @@ function App() {
 
   useEffect(()=>{
     setAuthToken(localStorage.getItem("authToken"))
-    if(authToken)setIsloggedin(true)
+    if(authToken) return setIsloggedin(true)
     else setIsloggedin(false)
   },[authToken])
 

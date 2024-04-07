@@ -11,10 +11,10 @@ export default function EditUserBox(props) {
         <div className="editBox">
         <p className='editText'>Edit </p>
             <div className="editData">
-                <input type="text" placeholder='Name' name="name" onChange={handleOnchange} />
-                <input type="email" placeholder='email' name="email" onChange={handleOnchange} />
-                <input type="text" placeholder='Phone'name="phone" onChange={handleOnchange} />
-                <input type="date" placeholder='Date of Birth' name='dob' onChange={handleOnchange}/>
+                <input type="text"  autoComplete="off" placeholder='Name' name="name" onChange={handleOnchange} />
+                <input type="email" autoComplete="off"  placeholder='email' name="email" onChange={handleOnchange} />
+                <input type="text"  autoComplete="off" placeholder='Phone'name="phone" onChange={handleOnchange} />
+                <input type="date"  autoComplete="off" placeholder='Date of Birth' name='dob' onChange={handleOnchange}/>
             </div>
             <div className="userEditButtons">
                 <button>Edit</button>

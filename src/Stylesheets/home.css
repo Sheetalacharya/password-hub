@@ -106,3 +106,25 @@ h2{
     border-radius: 50%;
     cursor: pointer;
 }
+
+@media screen and (max-width:650px) {
+    .inputGen-container>form{
+        width: 80vw;
+        height: 55vh;
+    }
+    .inputGen-container .mainoptions{
+        flex-direction: column;
+        align-items: center;
+        gap:10px;
+        margin: 10px 0;
+    }
+    #title-input, #password-output, #username-input{
+        width: 83%;
+    }
+}
+@media screen and (max-width:400px) {
+    .inputGen-container>form{
+        width: 90vw;
+        height: 55vh;
+    }
+}
