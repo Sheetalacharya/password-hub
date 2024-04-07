@@ -4,6 +4,7 @@ import "./App.css";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signp";
 import Home from "./pages/Home";
+import NotFound from "./pages/NotFound";
 
 import PasswordState from "./context/passwordState";
 import ProfilePage from "./pages/ProfilePage";
@@ -29,6 +30,7 @@ function App() {
             <Route path="/signup" element={<Signup setIsloggedin={setIsloggedin} />} />
             <Route path="/profile" element={<ProfilePage />} />
           </Routes>
+          
         </BrowserRouter>
       </PasswordState>
     </div>
