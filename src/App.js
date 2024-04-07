@@ -6,6 +6,7 @@ import Signup from "./pages/Signp";
 import Home from "./pages/Home";
 
 import PasswordState from "./context/passwordState";
+import ProfilePage from "./pages/ProfilePage";
 
 function App() {
   const [isloggedin,setIsloggedin]=useState(false)
@@ -23,9 +24,10 @@ function App() {
       <PasswordState>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Home isloggedin={isloggedin} />} />
-            <Route path="/signin" element={<Signin />} />
-            <Route path="/signup" element={<Signup />} />
+            <Route path="/" element={<Home isloggedin={isloggedin} setIsloggedin={setIsloggedin} />} />
+            <Route path="/signin" element={<Signin setIsloggedin={setIsloggedin} />} />
+            <Route path="/signup" element={<Signup setIsloggedin={setIsloggedin} />} />
+            <Route path="/profile" element={<ProfilePage />} />
           </Routes>
         </BrowserRouter>
       </PasswordState>

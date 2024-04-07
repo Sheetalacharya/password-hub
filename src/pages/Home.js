@@ -40,7 +40,7 @@ export default function Home(props) {
 
   useEffect(() => {
     if (!props.isloggedin) {
-      // navigate("/signin")
+      navigate("/signin")
     }
   });
 
@@ -76,7 +76,7 @@ export default function Home(props) {
 
   return (
     <>
-      <Navbar />
+      <Navbar setIsloggedin={props.setIsloggedin}/>
       <div className="home-container">
         <div className="inputGen-container">
           <form
