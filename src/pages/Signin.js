@@ -3,24 +3,16 @@ import React, { useState } from "react";
 
 import "../Stylesheets/loginsignup.css";
 
-import message_icon from "../assets/message.png";
-import password_icon from "../assets/eye.png";
-import invisiblepassword_icon from "../assets/invisible.png";
+
 
 const Signin = () => {
-  const [passwordVisible, setPasswordVisible] = useState(false);
-  const [passwordIcon, setPasswordIcon] = useState(invisiblepassword_icon);
-  const [buttonClicked, setButtonClicked] = useState(false);
+  
 
   const [signinValues, setSigninValues] = useState({
     email: "",
     password: "",
   });
-  const togglePasswordVisibility = () => {
-    setPasswordVisible(!passwordVisible);
-    setPasswordIcon(passwordVisible ? invisiblepassword_icon : password_icon);
-    setButtonClicked(true);
-  };
+ 
   const inputHandler = (e) => {
     setSigninValues({ ...signinValues, [e.target.name]: e.target.value });
   };
@@ -53,28 +45,25 @@ const Signin = () => {
           <h2>Login</h2>
           <form action="/">
             <div className="inputlogin">
-              <img src={message_icon} alt="" />
+             
               <input
                 type="email"
                 name="email"
                 value={signinValues.email}
-                onChange={inputHandler}
+                onChange={inputHandler} placeholder="Email"
               />
-              <label>Email</label>
+              
             </div>
             <div className="inputlogin">
-              <img
-                src={passwordIcon}
-                alt=""
-                onClick={togglePasswordVisibility}
-              />
+             
+      
               <input
-                type={passwordVisible ? "text" : "password"}
+                type="password"
                 name="password"
                 value={signinValues.password}
-                onChange={inputHandler}
+                onChange={inputHandler} placeholder="Password"
               />
-              <label>Password</label>
+              
             </div>
             <button type="submit" className="btn" onClick={signin}>
               Login
