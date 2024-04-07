@@ -5,20 +5,23 @@ import { passwordcontext } from "../context/passwordState";
 
 export default function SavedPasscard(props) {
   const passwordState = useContext(passwordcontext);
-  const { passwords,deletePassword } = passwordState;
+  const { passwords, deletePassword } = passwordState;
 
-  const { _id, password, title } = props.password;
+  const { _id, password, title, username } = props.password;
   // const [savedTitle, setSavedTitle] = useState(title);
   // const [savedPass, setSavedPass] = useState(password);
   const [savedTitle, setSavedTitle] = useState("");
+  const [savedUname, setSavedUname] = useState("");
   const [savedPass, setSavedPass] = useState("");
-  const [showPass, setShowPass] = useState(false);
   const [copied, setCopied] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-
+  
+  const [showPass, setShowPass] = useState(false);
+  const [showUname,setShowUName]=useState(false)
 
   useState(() => {
     setSavedTitle(title);
+    setSavedUname(username);
     setSavedPass(password);
   }, [passwords]);
 
@@ -35,53 +38,50 @@ export default function SavedPasscard(props) {
     setIsEditing(false);
   }
 
-  function handleDelete(id) {
-    // confirmation before delete have to implement
-    deletePassword(id)
+  function handleDelete(id,title,username) {
+    let authToken=localStorage.getItem("authToken")
+    let confirmation=window.confirm(`Do you want to delete password for ${title} with username ${username}`)
+    if (confirmation) return deletePassword(id,authToken)
   }
   function handleEditedText(title, password) {
     setSavedTitle(title);
+    setSavedUname(username);
     setSavedPass(password);
   }
   return (
     <div className="savedPass-card">
-      <span className="title-cardField">
-        <input
-          type="text"
-          name=""
-          // id="savedTitle"
-          disabled={true}
-          value={savedTitle}
-          onChange={(e) => setSavedTitle(e.target.value)}
-        />
-      </span>
-      <span className="password-cardField">
-        <input
-          type={`${showPass ? "text" : "password"}`}
-          name=""
-          // id="savedPass"
-          disabled={true}
-          value={savedPass}
-          onChange={(e) => setSavedPass(e.target.value)}
-        />
-        <i
-          className={`fa-solid ${showPass ? "fa-eye" : "fa-eye-slash"}`}
-          onClick={() => setShowPass((prev) => !prev)}
-        ></i>
-      </span>
-      <span className="card-buttons">
-        <button onClick={copyToClipboard}>
-          Copy <i className={`fa-${copied ? "solid" : "regular"} fa-copy`}></i>
+      <p>{savedTitle}</p>
+
+     <div className="usernameField credentailDiv">
+        <i className="fa-solid fa-user"></i>
+        <input type={`${showUname?"text":"password"}`} name="" disabled={true} value={username} />
+        <button className="eyeBtn cardIconBtn" onClick={()=>setShowUName(prev=>!prev)}>
+          <i className={`fa-solid fa-eye${showUname?"":"-slash"}`}></i>
         </button>
+        <button className="copyBtn cardIconBtn">
+          <i className="fa-solid fa-copy"></i>
+        </button> 
+      </div>
+
+      <div className="passwordField credentailDiv">
+        <i className="fa-solid fa-lock"></i>
+        <input type={`${showPass?"text":"password"}`} name="" disabled={true} value={password} />
+        <button className="eyeBtn cardIconBtn" onClick={()=>setShowPass(prev=>!prev)}>
+          <i className={`fa-solid fa-eye${showPass?"":"-slash"}`}></i>
+        </button>
+        <button className="copyBtn cardIconBtn" onClick={copyToClipboard}>
+          <i className="fa-solid fa-copy"></i>
+        </button>
+      </div> 
+
+      <div className="card-buttons">
         <button onClick={handleEdit}>
-          Edit <i className="fa-solid fa-pen-to-square"></i>
+          Edit <i className="fa-solid fa-edit"></i>
         </button>
-        <button onClick={()=>handleDelete(_id)}>
-          Delete <i className="fa-regular fa-trash-can"></i>
+        <button onClick={() => handleDelete(_id,title,username)}>
+          Delete <i className="fa-solid fa-trash"></i>
         </button>
-      </span>
-
-
+      </div>
       {isEditing && (
         <EditBox
           closeEditBox={closeEditBox}

@@ -29,8 +29,9 @@ export default function EditBox(props) {
     //     // eslint-disable-next-line
     //   }, []);
 
-function handleEditBtn(){
-  editPassword(editData,"auth")
+function handleEditBtn(){ 
+  let authToken=localStorage.getItem("authToken")
+  editPassword(editData, authToken,editData._id)
   props.handleEditedText(editData.title,editData.password)
   closeEditBox()
 }
@@ -39,7 +40,8 @@ function handleEditBtn(){
     <div className="editBox-container popup-container" ref={closeEditDiv} key={password._id}>
       <div className="sub-editCont">
         <h2>Edit here</h2>
-        <input type="text" name="title" value={editData.title} onChange={handleOnchange} placeholder="Enter your title" />
+        <input type="text" name="title" value={editData.title} onChange={handleOnchange} placeholder="Title" />
+        <input type="text" name="username" value={editData.username} onChange={handleOnchange} placeholder="Username" />
         <div>
         <input type={`${passVisible?"text":"password"}`} name="password" value={editData.password} onChange={handleOnchange} placeholder="Enter your password" />
             <i className={`fa-solid fa-eye${passVisible?"":"-slash"}`} onClick={()=>setPassVisible(prev=>!prev)}></i>

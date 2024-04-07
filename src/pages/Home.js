@@ -9,17 +9,31 @@ import { passwordcontext } from "../context/passwordState";
 
 export default function Home(props) {
   const passwordState = useContext(passwordcontext);
-  const {setBtnSelected,generatedPass,setGeneratedPass ,titleInp, setTitleInp,savePassword,passwords} = passwordState;
-  
+  const {
+    fetchAllPassword,
+    generatedPass,
+    setGeneratedPass,
+    titleUnameInp,
+    handleTitleUnameInp,
+    savePassword,
+    passwords,
+    regenerate,
+    btnSelected,
+    selectedForGen,
+  } = passwordState;
+
+  useEffect(()=>{
+    let authToken=localStorage.getItem("authToken")
+    fetchAllPassword(authToken)
+  },[])
 
   const [popupForCustom, setPopupForCustom] = useState(false);
   const [popupForRandom, setPopupForRandom] = useState(false);
-  
+  const [passwordVisble, setPasswordVisible] = useState(false);
   const [copied, setCopied] = useState(false);
 
   const titleInputField = useRef();
   const navigate = useNavigate();
-
 
   useEffect(() => {
     if (!props.isloggedin) {
@@ -38,15 +52,23 @@ export default function Home(props) {
 
   function customBtnClick() {
     popupForCustom ? setPopupForCustom(false) : setPopupForCustom(true);
-    setBtnSelected("custom")
-  }
-  function randomBtnClick() {
-    popupForRandom ? setPopupForRandom(false) : setPopupForRandom(true);
-    setBtnSelected("random")
   }
 
-  function handleSaveBtn(){
-    savePassword({title:titleInp,password:generatedPass},"auth")
+  function randomBtnClick() {
+    popupForRandom ? setPopupForRandom(false) : setPopupForRandom(true);
+  }
+
+  function handleSaveBtn() {
+    console.log(titleUnameInp, generatedPass);
+    let authToken=localStorage.getItem("authToken")
+    savePassword(
+      {
+        title: titleUnameInp.title,
+        username: titleUnameInp.username,
+        password: generatedPass,
+      },
+      authToken
+    );
   }
 
   return (
@@ -69,31 +91,60 @@ export default function Home(props) {
               type="text"
               id="title-input"
               placeholder="Enter title of site"
-              onChange={(e) => setTitleInp(e.target.value)}
-              value={titleInp}
+              name="title"
+              onChange={handleTitleUnameInp}
+              value={titleUnameInp.title}
+              ref={titleInputField}
+            />
+            <input
+              type="text"
+              id="username-input"
+              placeholder="Username"
+              name="username"
+              onChange={handleTitleUnameInp}
+              value={titleUnameInp.username}
               ref={titleInputField}
             />
             <div>
               <input
-                type="text"
+                type={`${passwordVisble ? "text" : "password"}`}
                 id="password-output"
                 placeholder="Your password will show here"
                 value={generatedPass}
                 onChange={(e) => setGeneratedPass(e.target.value)}
               />
+              <button
+                id="passwordEyeBtn"
+                onClick={() => setPasswordVisible((prev) => !prev)}
+              >
+                <i
+                  className={`fa-solid fa-eye${passwordVisble ? "" : "-slash"}`}
+                ></i>
+              </button>
               <button id="copyPasswordBtn" onClick={copyToClipboard}>
                 <i className={`fa-${copied ? "solid" : "regular"} fa-copy`}></i>
               </button>
             </div>
             <div>
-              <button id="regenerateBtn">Regenerate</button>
-              <button id="saveBtn" onClick={handleSaveBtn}>Save</button>
+              <button
+                id="regenerateBtn"
+                disabled={btnSelected === "" ? true : false}
+                onClick={() => {
+                  let authToken=localStorage.getItem("authToken")
+                  regenerate(selectedForGen,authToken); 
+                }}
+              >
+                Regenerate
+              </button>
+              <button id="saveBtn" onClick={handleSaveBtn}>
+                Save
+              </button>
             </div>
           </form>
         </div>
-       {passwords &&  <h2>Saved Passwords</h2>}
+        {passwords && <h2>Saved Passwords</h2>}
 
-      <SavedPass/>
+        <SavedPass />
 
         {/* to add password */}
         <button

@@ -8,10 +8,9 @@ export default function PopupForRandom(props) {
   const closeRandomPopup = useRef();
 
   const passwordState=useContext(passwordcontext)
-const {generateRandomPassword}=passwordState
+const {generateRandomPassword,setBtnSelected,setSelectedForgen}=passwordState
 
-  const[lettersCheck,setLettersCheck]=useState(false)
-  const[numbersCheck,setNumbersCheck]=useState(false)
+  const[numberCheck,setNumbersCheck]=useState(false)
   const[uppercaseCheck,setUpperCheck]=useState(false)
   const[lowercaseCheck,setLowerCheck]=useState(false)
   const[splCharCheck,setSplCheck]=useState(false)
@@ -36,8 +35,7 @@ const {generateRandomPassword}=passwordState
   }, []);
 
   function printd(){
-    console.log({lettersCheck})
-console.log({numbersCheck})
+console.log({numberCheck})
 console.log({uppercaseCheck})
 console.log({lowercaseCheck})
 console.log({splCharCheck})
@@ -45,15 +43,19 @@ console.log({lengthInp})
   }
 
   function sendToGenerate(){
-    printd()
+    // printd()
+    
+    let authToken=localStorage.getItem("authToken")
     const data={
-      numbersCheck,
+      numberCheck,
 uppercaseCheck,
 lowercaseCheck,
 splCharCheck,
 lengthInp  ,
     }
-    generateRandomPassword(data)
+    generateRandomPassword(data,authToken)
+    setBtnSelected("random")
+    setSelectedForgen(data)
     props.closePopup("random", false);
   }
 
@@ -66,19 +68,15 @@ lengthInp  ,
         <p>What do you want to include in your random password ?</p>
         <ul>
           <li>
-            <label htmlFor="letterRB">Letters</label>
-            <input type="checkbox" name="randomFiedldInp" id="letterRB" checked={lettersCheck} onChange={e=>setLettersCheck(e.target.checked)} />
-          </li>
-          <li>
             <label htmlFor="numberRB">Numbers</label>
-            <input type="checkbox" name="randomFiedldInp" id="numberRB" checked={numbersCheck} onChange={e=>setNumbersCheck(e.target.checked)}  />
+            <input type="checkbox" name="randomFiedldInp" id="numberRB" checked={numberCheck} onChange={e=>setNumbersCheck(e.target.checked)}  />
           </li>
           <li>
-            <label htmlFor="uppercaseRB">UpperCase</label>
+            <label htmlFor="uppercaseRB">Uppercase Letters </label>
             <input type="checkbox" name="randomFiedldInp" id="uppercaseRB" checked={uppercaseCheck} onChange={e=>setUpperCheck(e.target.checked)} />
           </li>
           <li>
-            <label htmlFor="lowercaseRB">LowerCase</label>
+            <label htmlFor="lowercaseRB">Lowercase Letters</label>
             <input type="checkbox" name="randomFiedldInp" id="lowercaseRB" checked={lowercaseCheck} onChange={e=>setLowerCheck(e.target.checked)} />
           </li>
           <li>

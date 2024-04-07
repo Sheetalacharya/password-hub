@@ -3,13 +3,17 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const Password = require("../model/passwordSchema");
+const User=require("../model/userSchema")
+
+const LoginStatus=require("../middleware/LoginStatus")
 const router = express.Router();
 
 const secretKey = "process.env.SECRET_KEY";
 
 // Random password generation
-router.post("/randompassword", async (req, res) => {
+router.post("/randompassword", LoginStatus,async (req, res) => {
     const { length, useLowercase, useUppercase, useNumbers, useSpecial } = req.body;
+    console.log(req.body);
   try {
         const randomPass = generateRandomPassword(length, useLowercase, useUppercase, useNumbers, useSpecial);
         res.status(200).json({ status:"success",message:randomPass });
@@ -19,37 +23,73 @@ router.post("/randompassword", async (req, res) => {
 });
 
 // Customized password generation
-router.post('/custompassword', async (req, res) => {
-    const {length,name,dob,email,phone,useName,usePhone,useEmail,useDOB,useNumbers,useLowercase,useUppercase,
+router.post('/custompassword',LoginStatus, async (req, res) => {
+    const userId=req.user
+    const {length,useName,usePhone,useEmail,useDOB,useNumbers,useLowercase,useUppercase,
         useSpecial,others} = req.body;
+        console.log(req.body);
   try{
-      const customPassword = generateCustomPassword(length,name,dob,email,phone,useName,usePhone,useEmail,useDOB,useNumbers,useLowercase,useUppercase,
+    const userData=await User.findById(userId);
+    if(!userData)return res.status(400).json({status:"error", error: 'password not found' })
+    const {name,email,dob,phone}=userData
+console.log(userData);
+    const customPassword = generateCustomPassword(length,name,dob,email,phone,useName,usePhone,useEmail,useDOB,useNumbers,useLowercase,useUppercase,
         useSpecial,others);
   
-      res.json({ customPassword });
+      res.status(200).json({status:"success",message: customPassword });
     } catch (error) {
-        console.error('Error generating password:', error);
         res.status(500).json({ error: 'An error occurred while generating the password.' });
     }
   });
 
 
 // Save password
-  router.post('/savepassword', async (req, res) => {
-    const { userId, title, password } = req.body;
-    const newPassword = new Password({userId, title, password});
+  router.post('/savepassword',LoginStatus, async (req, res) => {
+    const {title,username,password } = req.body;
+    const userId=req.user
+    const newPassword = new Password({userId, title,username, password});
     try {
       await newPassword.save();
-      res.status(201).json({ message: 'Password saved successfully' });
+      res.status(201).json({status:"success", message: newPassword });
     } catch (error) {
-      console.error('Error saving password:', error);
-      res.status(500).json({ error: 'Internal server error' });
+      res.status(500).json({ status:"error",error: 'Internal server error' });
     }
-  });
+  });  
 
+  router.post('/updatepassword:id',LoginStatus, async (req, res) => {
+    const {title,username,password } = req.body;
+    const passId=req.params.id.replace(":","")
+    const userId=req.user
+    try {
+      let updatedPass=await Password.findByIdAndUpdate(passId,{title,username,password,userId})
+      res.status(201).json({status:"success", message: updatedPass });
+    } catch (error) {
+      res.status(500).json({ status:"error",error: 'Internal server error' });
+    }
+  });  
+
+  router.delete('/deletepassword:id',LoginStatus, async (req, res) => {
+    const passId=req.params.id.replace(":","")
+    try {
+        let findPass=await Password.findById(passId)
+        if(!findPass)return res.status(400).json({status:"error", error: 'password not found' });
+      await Password.findByIdAndDelete(passId)
+      res.status(201).json({status:"success", message: 'Password deleted' });
+    } catch (error) {
+      res.status(500).json({status:"error", error: 'Internal server error' });
+    }
+  }); 
+
+  router.get('/fetchpasswords',LoginStatus, async (req, res) => {
+    const userId=req.user
+    try {
+      let passwords=await Password.find({userId})
+      res.status(201).json({status:"success", message: passwords });
+    } catch (error) {
+      res.status(500).json({status:"error", error: 'Internal server error' });
+    }
+  });  
   module.exports = router;
-
-
 
 // Function to generate random password
 function generateRandomPassword(length = 10, useLowercase = false, useUppercase = false, useNumbers = false, useSpecial = false) {
@@ -94,8 +134,6 @@ function getRandomCharacter(characterSet) {
 
 
 //Function to generate customized password
-// length,name,dob,email,phone,useName,usePhone,useEmail,useDOB,useNumbers,useLowercase,useUppercase,
-        // useSpecial,others
 function generateCustomPassword(length = 10, name = '', dob = '', email = '', phone = '', useName = false, usePhone = false, useEmail = false, useDOB = false, useNumbers= false, useLowercase = false, useUppercase = false, useSpecial = false, others = []) {
     const lowercaseChars = 'abcdefghijklmnopqrstuvwxyz';
     const uppercaseChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
