@@ -4,6 +4,7 @@ import "./App.css";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signp";
 import Home from "./pages/Home";
+import NotFound from "./pages/NotFound";
 
 import PasswordState from "./context/passwordState";
 import ProfilePage from "./pages/ProfilePage";
@@ -14,7 +15,7 @@ function App() {
 
   useEffect(()=>{
     setAuthToken(localStorage.getItem("authToken"))
-    if(authToken)setIsloggedin(true)
+    if(authToken) return setIsloggedin(true)
     else setIsloggedin(false)
   },[authToken])
 
@@ -28,6 +29,7 @@ function App() {
             <Route path="/signin" element={<Signin setIsloggedin={setIsloggedin} />} />
             <Route path="/signup" element={<Signup setIsloggedin={setIsloggedin} />} />
             <Route path="/profile" element={<ProfilePage />} />
+            <Route path="*" element={<NotFound/>} />
           </Routes>
         </BrowserRouter>
       </PasswordState>

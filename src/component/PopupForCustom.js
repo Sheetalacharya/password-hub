@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState, useContext } from "react";
 import "../Stylesheets/popupForCustom.css";
 import { passwordcontext } from "../context/passwordState";
+import PopupMsg from "./PopupMsg";
 
 export default function PopupForCustom(props) {
   const closePopup = useRef();
@@ -14,6 +15,7 @@ export default function PopupForCustom(props) {
   const [splCharCheck, setSplCheck] = useState(false);
   const [lengthInp, setlen] = useState(4);
   const [otherWords, setOther] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
 
   const passwordState = useContext(passwordcontext);
   const { generateCustomPassword, setBtnSelected,setSelectedForgen } = passwordState;
@@ -48,6 +50,9 @@ export default function PopupForCustom(props) {
     let otherWordsArr = otherWords.split(",");
     console.log(otherWordsArr);
     let authToken=localStorage.getItem("authToken")
+    if(!nameCheck ||!numberCheck ||!phoneCheck ||!emailCheck ||!dobCheck ||!uppercaseCheck ||!lowercaseCheck ||!splCharCheck ){
+      return showErrorMessage("Need to check atleat 1 options")
+    }
     const data = {
       nameCheck,
       numberCheck,
@@ -64,6 +69,13 @@ export default function PopupForCustom(props) {
     setSelectedForgen(data)
     setBtnSelected("custom");
     props.closePopup("custom", false);
+  }
+
+  function showErrorMessage(msg) {
+    setErrorMsg(msg);
+    setTimeout(() => {
+      setErrorMsg("");
+    }, 4000);
   }
 
   return (
@@ -176,6 +188,7 @@ export default function PopupForCustom(props) {
         </ul>
         <button onClick={sendToGenerate}>Generate</button>
       </div>
+      {errorMsg && <PopupMsg message={errorMsg} />}
     </div>
   );
 }

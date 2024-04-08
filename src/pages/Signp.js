@@ -25,7 +25,7 @@ const Signp = (props) => {
       showErrorMessage("Fill all the details");
       return false;
     }
-    if (email == "" || email == " " || password == "" || password == " " || fullname=="" || fullname==" " || dob==""||dob==" " || phone=="" || phone==" ") {
+    if (email === "" || email === " " || password === "" || password === " " || fullname==="" || fullname===" " || dob===""||dob===" " || phone==="" || phone===" ") {
       showErrorMessage("Fill all the details");
       return false;
     }
@@ -33,11 +33,11 @@ const Signp = (props) => {
       showErrorMessage("Invalid Email");
       return false;
     }
-    if(parseInt(phone)==NaN){
+    if(isNaN(parseInt(phone))){
       showErrorMessage("Invalid phone number")
       return false
     }
-    if(phone.length!=10)
+    if(phone.length!==10)
     {
       showErrorMessage("invalid phone number")
       return false
@@ -50,7 +50,7 @@ const Signp = (props) => {
       showErrorMessage("password not matching");
       return false;
     }
-    if(password!=confirmpassword) {
+    if(password!==confirmpassword) {
       showErrorMessage("password not matching");
       return false;
     }
@@ -108,6 +108,7 @@ const Signp = (props) => {
                 value={signupValues.fullname}
                 onChange={inputHandler}
                 placeholder="Name"
+                autoComplete="off"
               />
             </div>
             <div className="inputRegister">
@@ -117,6 +118,7 @@ const Signp = (props) => {
                 value={signupValues.email}
                 onChange={inputHandler}
                 placeholder="Email"
+                autoComplete="off"
               />
             </div>
             <div className="inputRegister">
@@ -136,6 +138,7 @@ const Signp = (props) => {
                 onChange={inputHandler}
                 placeholder="Phone"
                 pattern="\d*"
+                autoComplete="off"
               />
             </div>
             <div className="inputRegister">

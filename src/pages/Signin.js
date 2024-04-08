@@ -21,7 +21,7 @@ const Signin = (props) => {
       showErrorMessage("Invalid credential");
       return false;
     }
-    if (email == "" || email == " " || password == "" || password == " ") {
+    if (email === "" || email === " " || password === "" || password === " ") {
       showErrorMessage("Invalid credential");
       return false;
     }
@@ -75,7 +75,7 @@ const Signin = (props) => {
       <div className="wrapper1">
         <div className="form-box login">
           <h2>Login</h2>
-          <form onSubmit={(e) => e.preventDefault()}>
+          <form onSubmit={(e) => e.preventDefault()} >
             <div className="inputlogin">
               <input
                 type="email"
@@ -83,6 +83,7 @@ const Signin = (props) => {
                 value={signinValues.email}
                 onChange={inputHandler}
                 placeholder="Email"
+                autoComplete="off"
               />
             </div>
             <div className="inputlogin">

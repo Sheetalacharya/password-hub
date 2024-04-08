@@ -119,9 +119,9 @@ console.log(userData);
         return res.status(400).json({ status:"error",error: 'Please fill all the details' });
     }
     const passId=req.params.id.replace(":","")
-    const userId=req.user
     try {
-      let updatedPass=await Password.findByIdAndUpdate(passId,{title,username,password,userId})
+      let updatedPass=await Password.findByIdAndUpdate(passId,{title,username,password})
+      console.log(updatedPass);
       res.status(201).json({status:"success", message: updatedPass });
     } catch (error) {
       res.status(500).json({ status:"error",error: 'Internal server error' });
