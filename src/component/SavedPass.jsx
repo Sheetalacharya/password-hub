@@ -6,7 +6,6 @@ import { passwordcontext } from "../context/passwordState";
 export default function SavedPass() {
 const passwordState=useContext(passwordcontext)
 const {passwords}=passwordState
-console.log(passwords);
   return (
     <div className="savedPass-container">
       {passwords.length>0 && passwords.map((password)=>(<SavedPasscard password={password} key={password._id}/>))}

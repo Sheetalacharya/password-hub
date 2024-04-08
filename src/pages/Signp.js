@@ -84,7 +84,6 @@ const Signp = (props) => {
       },)
     });
     const data = await response.json();
-    console.log(data);
     if (data.status === "success") {
       localStorage.setItem("authToken", data.message);
       props.setIsloggedin(true)
