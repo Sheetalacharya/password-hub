@@ -4,7 +4,7 @@ nav{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: red;   
+    background-color: rgb(53, 62, 110);    
 }
 nav>div{
     margin: 50px;
@@ -17,13 +17,15 @@ nav>.logo{
     height: 40px;
     border-radius: 50%;
     cursor: pointer;
+    color: rgb(53, 62, 110); 
+    background-color:aliceblue;
 }
 .profileList{
     position: absolute;
     top: 70px;
     right: 20px;
-    background-color: red;
-    border: 1px solid;
+    background-color:rgb(24, 30, 56);  
+    border: 0px solid;
     width: 100px;
     border-radius: 10px;
 }
@@ -34,8 +36,10 @@ nav>.logo{
 }
 .profileList>li>button{
     width: 100px;
-    height: 50px;
+    height: 40px;
     cursor: pointer;
     background-color: transparent;
-    border: 1px solid;
+    border: 0px solid;
+    font-weight:600;
+    color: aliceblue;
 }

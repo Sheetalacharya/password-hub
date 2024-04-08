@@ -20,7 +20,7 @@
   max-width: max-content;
   min-height: 80%;
   max-height: max-content;
-  background-color: rgb(0, 255, 26);
+  background-color: rgba(156, 167, 122, 0.689);
   border-radius: 10px;
   padding: 10px;
   padding-bottom: 20px;
@@ -43,6 +43,7 @@
     width: 90%;
     margin: 10px auto;
     margin-top: 20px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
 }
 .popupSection>ul{
     /* background-color: red; */
@@ -72,6 +73,7 @@
 .popupSection>ul>li>label,
 .popupSection>ul>li>input{
     cursor: pointer;
+    font-family:Georgia, 'Times New Roman', Times, serif;
 }
 
 /* .popupSection>ul>li>label{
@@ -113,5 +115,9 @@
 .popupSection>button{
     padding: 10px 25px;
     border-radius: 10px;
+    width: 80%;
+    background-color: rgb(89, 141, 85); 
+    font-weight: bold;
+    color: aliceblue;
 }
 

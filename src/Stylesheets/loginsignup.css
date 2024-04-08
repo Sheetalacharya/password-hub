@@ -1,5 +1,5 @@
-.signupBody {
-    background-image: url('../assets/Img-bg.png');
+.signupBody, .signinBody {
+    background-image: url('../assets/img_blue.jpeg'); 
     background-size: cover;
     background-position: center;
     height:100vh;
@@ -34,7 +34,7 @@
     
     .form-box h2 {
       font-size: 1.5em;
-      color: #162938;
+      color: #ffffff;
       text-align: center;
       margin-top: 20px;
     }
@@ -76,6 +76,7 @@
       outline: none;
       padding-right: 30px; 
       margin-bottom: 5px;
+      color: white;
     }
     
     /* .inputRegister img {
@@ -218,17 +219,6 @@ input::-webkit-datetime-edit {
 
 /* Styling for login page */
 
-.signinBody {
-  background-image: url('../assets/Img-bg.png');
-  background-size: cover;
-  background-position: center;
-  height:100vh;
-  overflow-x:hidden;
-  overflow-y: scroll;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 .wrapper1 {
   display: flex;
   flex-direction: column;
@@ -273,6 +263,10 @@ input::-webkit-datetime-edit {
   border: none;
   outline: none;
   padding-right: 30px; 
+  color: white;
+}
+.inputlogin input::placeholder, .inputRegister input::placeholder{
+  color: rgba(255, 255, 255, 0.3);
 }
 
 /* .inputlogin img {
@@ -350,6 +344,7 @@ input::-webkit-datetime-edit {
       margin: 10px 0; 
   }
 }
+
 
 
 

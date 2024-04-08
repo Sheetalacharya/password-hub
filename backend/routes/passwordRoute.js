@@ -13,12 +13,29 @@ const secretKey = "process.env.SECRET_KEY";
 // Random password generation
 router.post("/randompassword", LoginStatus,async (req, res) => {
     const { length, useLowercase, useUppercase, useNumbers, useSpecial } = req.body;
+
+    let count = 0;
+
+    // Count the number of character sets selected
+    if (useLowercase) count++;
+    if (useUppercase) count++;
+    if (useNumbers) count++;
+    if (useSpecial) count++;
+    
+    if(count > length){
+        return res.status(400).json({ status:"error", error: 'Please input a valid length to include all the selected details'});
+    }
+    if(length < 4){
+        return res.status(400).json({ status:"error", error: 'Length of the password should not be less than 4'});
+    }
+
     console.log(req.body);
   try {
-        const randomPass = generateRandomPassword(length, useLowercase, useUppercase, useNumbers, useSpecial);
+        const randomPass = generateRandomPassword(length, useLowercase, useUppercase, useNumbers, useSpecial, count);
         res.status(200).json({ status:"success",message:randomPass });
   } catch (e) {
-        res.status(500).json({ error: 'An error occurred while generating the password.' });
+    console.log(e);
+        res.status(500).json({ status:"error", error: 'An error occurred while generating the password.' });
   }
 });
 
@@ -27,6 +44,43 @@ router.post('/custompassword',LoginStatus, async (req, res) => {
     const userId=req.user
     const {length,useName,usePhone,useEmail,useDOB,useNumbers,useLowercase,useUppercase,
         useSpecial,others} = req.body;
+
+    let count = 0;
+
+    // Count the number of character sets selected
+    if (useName) count++;
+    if (usePhone) count++;
+    if (useEmail) count++;
+    if (useDOB) count++;
+    if (useLowercase && (useName || useEmail)){ 
+        count=count;
+    }
+    else if(useLowercase){
+        count++;
+    }
+    if (useUppercase && (useName || useEmail)){ 
+        count=count;
+    }
+    else if(useUppercase){
+        count++;
+    }
+    if (useNumbers && (useDOB || usePhone)){ 
+        count=count;
+    }
+    else if(useNumbers){
+        count++;
+    }
+    if (useSpecial) count++;
+    if (others.length != 0) count++;
+
+    if(count > length){
+        return res.status(400).json({ status:"error", error: 'Please input a valid length to include all the selected details'});
+    }
+    if(length < 4){
+        return res.status(400).json({ status:"error", error: 'Length of the password should not be less than 4'});
+    }
+
+
         console.log(req.body);
   try{
     const userData=await User.findById(userId);
@@ -34,11 +88,11 @@ router.post('/custompassword',LoginStatus, async (req, res) => {
     const {name,email,dob,phone}=userData
 console.log(userData);
     const customPassword = generateCustomPassword(length,name,dob,email,phone,useName,usePhone,useEmail,useDOB,useNumbers,useLowercase,useUppercase,
-        useSpecial,others);
+        useSpecial,others,count);
   
       res.status(200).json({status:"success",message: customPassword });
     } catch (error) {
-        res.status(500).json({ error: 'An error occurred while generating the password.' });
+        res.status(500).json({ status:"error", error: 'An error occurred while generating the password.' });
     }
   });
 
@@ -46,6 +100,9 @@ console.log(userData);
 // Save password
   router.post('/savepassword',LoginStatus, async (req, res) => {
     const {title,username,password } = req.body;
+    if(title == '' || username == '' || password == ''){
+        return res.status(400).json({ status:"error",error: 'Please fill all the details' });
+    }
     const userId=req.user
     const newPassword = new Password({userId, title,username, password});
     try {
@@ -58,6 +115,9 @@ console.log(userData);
 
   router.post('/updatepassword:id',LoginStatus, async (req, res) => {
     const {title,username,password } = req.body;
+    if(title == '' || username == '' || password == ''){
+        return res.status(400).json({ status:"error",error: 'Please fill all the details' });
+    }
     const passId=req.params.id.replace(":","")
     const userId=req.user
     try {
@@ -92,20 +152,20 @@ console.log(userData);
   module.exports = router;
 
 // Function to generate random password
-function generateRandomPassword(length = 10, useLowercase = false, useUppercase = false, useNumbers = false, useSpecial = false) {
+function generateRandomPassword(length = 10, useLowercase = false, useUppercase = false, useNumbers = false, useSpecial = false, characterCount) {
     const lowercaseChars = 'abcdefghijklmnopqrstuvwxyz';
     const uppercaseChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     const numberChars = '0123456789';
     const specialChars = '@#$%^';
 
     let characters = '';
-    let characterCount = 0;
+    // let characterCount = 0;
 
-    // Count the number of character sets selected
-    if (useLowercase) characterCount++;
-    if (useUppercase) characterCount++;
-    if (useNumbers) characterCount++;
-    if (useSpecial) characterCount++;
+    // // Count the number of character sets selected
+    // if (useLowercase) characterCount++;
+    // if (useUppercase) characterCount++;
+    // if (useNumbers) characterCount++;
+    // if (useSpecial) characterCount++;
 
     // Calculate the length of each character set
     const partialLength = Math.floor(length / characterCount);
@@ -134,49 +194,50 @@ function getRandomCharacter(characterSet) {
 
 
 //Function to generate customized password
-function generateCustomPassword(length = 10, name = '', dob = '', email = '', phone = '', useName = false, usePhone = false, useEmail = false, useDOB = false, useNumbers= false, useLowercase = false, useUppercase = false, useSpecial = false, others = []) {
+function generateCustomPassword(length = 10, name = '', dob = '', email = '', intPhone = '', useName = false, usePhone = false, useEmail = false, useDOB = false, useNumbers= false, useLowercase = false, useUppercase = false, useSpecial = false, others = [], count) {
     const lowercaseChars = 'abcdefghijklmnopqrstuvwxyz';
     const uppercaseChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     const numberChars = '0123456789';
     const specialChars = '@#$%^';
 
     let characters = [];
-    let i, start, rand, up, low, count = 0;
+    let i, start, rand, up, low;
     let nameShort = '', phoneShort = '', emailShort = '', otherShort = '';
+    let phone = intPhone.toString();
 
     // Count the number of character sets selected
-    if (useName) count++;
-    if (usePhone) count++;
-    if (useEmail) count++;
-    if (useDOB) count++;
-    if (useLowercase && (useName || useEmail)){ 
-        count=count;
-    }
-    else if(useLowercase){
-        count++;
-    }
-    if (useUppercase && (useName || useEmail)){ 
-        count=count;
-    }
-    else if(useUppercase){
-        count++;
-    }
-    if (useNumbers && (useDOB || usePhone)){ 
-        count=count;
-    }
-    else if(useNumbers){
-        count++;
-    }
-    if (useSpecial) count++;
-    if (others != '') count++;
+    // if (useName) count++;
+    // if (usePhone) count++;
+    // if (useEmail) count++;
+    // if (useDOB) count++;
+    // if (useLowercase && (useName || useEmail)){ 
+    //     count=count;
+    // }
+    // else if(useLowercase){
+    //     count++;
+    // }
+    // if (useUppercase && (useName || useEmail)){ 
+    //     count=count;
+    // }
+    // else if(useUppercase){
+    //     count++;
+    // }
+    // if (useNumbers && (useDOB || usePhone)){ 
+    //     count=count;
+    // }
+    // else if(useNumbers){
+    //     count++;
+    // }
+    // if (useSpecial) count++;
+    // if (others.length != 0) count++;
 
-    // validation for length
-    if(count > length){
-        console.log("Please input a valid length to include all the selected details");
-    }
-    if(length < 4){
-        console.log("Please input a valid length");
-    }
+    // // validation for length
+    // if(count > length){
+    //     console.log("Please input a valid length to include all the selected details");
+    // }
+    // if(length < 4){
+    //     console.log("Please input a valid length");
+    // }
 
     // Calculate the length of each character set
     let part = Math.floor(length / count);
@@ -309,15 +370,16 @@ function generateCustomPassword(length = 10, name = '', dob = '', email = '', ph
         }
 
         // Including other details in password
-        if(others!=''){
-            start = Math.abs(Math.floor(Math.random() * others.length-part));
+        if(others.length != 0){
+            let otherWord = others[0];
+            start = Math.abs(Math.floor(Math.random() * otherWord.length-part));
                 for (i=start; i<start+part; i++){
-                    if(i>others.length-1)
+                    if(i>otherWord.length-1)
                     {
-                        otherShort += others[Math.abs(Math.floor(Math.random() * others.length))];
+                        otherShort += otherWord[Math.abs(Math.floor(Math.random() * otherWord.length))];
                     }
                     else{
-                        otherShort += others[i];
+                        otherShort += otherWord[i];
                     }
                 }
 
