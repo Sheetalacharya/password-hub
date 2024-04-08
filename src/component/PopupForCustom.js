@@ -46,11 +46,9 @@ export default function PopupForCustom(props) {
     console.log({ otherWords });
   }
 
-  function sendToGenerate() {
-    let otherWordsArr = otherWords.split(",");
-    console.log(otherWordsArr);
+  function sendToGenerate(){
     let authToken=localStorage.getItem("authToken")
-    if(!nameCheck ||!numberCheck ||!phoneCheck ||!emailCheck ||!dobCheck ||!uppercaseCheck ||!lowercaseCheck ||!splCharCheck ){
+    if(!nameCheck && !numberCheck && !phoneCheck && !emailCheck && !dobCheck && !uppercaseCheck && !lowercaseCheck && !splCharCheck ){
       return showErrorMessage("Need to check atleat 1 options")
     }
     const data = {
@@ -63,11 +61,12 @@ export default function PopupForCustom(props) {
       lowercaseCheck,
       splCharCheck,
       lengthInp,
-      otherWords: otherWordsArr,
+      otherWords,
     };
     generateCustomPassword(data,authToken);
     setSelectedForgen(data)
     setBtnSelected("custom");
+    props.setCopied(false)
     props.closePopup("custom", false);
   }
 
@@ -173,22 +172,20 @@ export default function PopupForCustom(props) {
               onChange={(e) => setlen(e.target.value)}
             />
           </li>
-          <li className="otherWordsLi">
-            <label htmlFor={"otherCB"}> Other words</label>
-            <textarea
-              cols={30}
-              rows={5}
-              placeholder="Insert using comma (petname, favourite thing, address)"
-              id="otherCB"
+          <li>
+            <label htmlFor={"otherCB"}> Extra Word</label>
+            <input
+              type="text"
               name="otherWords"
+              id="otherCB"
               value={otherWords}
               onChange={(e) => setOther(e.target.value)}
-            ></textarea>
+            />
           </li>
         </ul>
         <button onClick={sendToGenerate}>Generate</button>
       </div>
-      {errorMsg && <PopupMsg message={errorMsg} />}
+      {errorMsg && <PopupMsg message={errorMsg} setErrorMsg={setErrorMsg} />}
     </div>
   );
 }

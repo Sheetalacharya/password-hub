@@ -91,13 +91,17 @@
 .editUser-container>.editBox>.editData>input{
     width: 70%;
     height: 30px;
+    border-radius: 5px;
+}
+.editData input{
+    padding-left: 10px;
 }
 .editUser-container>.editBox>.editData>div>input{
     width: 76%;
 }
 .userEditButtons button{
     padding: 10px 18px; 
-    margin: 10px ;
+    margin: 15px 10px;
     border-radius: 10px;
 }
 #backBtn{

@@ -51,6 +51,8 @@ export default function PasswordState(props) {
 
   async function generateCustomPassword(choices,authToken) {
     // setGeneratedPass("custom password generated");
+    
+    console.log({choices});
     const response = await fetch(`${url}/manage/custompassword`, {
       method: "POST",
       headers: {
@@ -71,6 +73,7 @@ export default function PasswordState(props) {
       }),
     });
     const data = await response.json();
+    console.log({response:data});
     if (data.status !== "error") {
       return setGeneratedPass(data.message);
     }
@@ -80,7 +83,6 @@ export default function PasswordState(props) {
   async function generateRandomPassword(choices,authToken) {
   //  setGeneratedPass("random password generated");
 
-    console.log({choices});
     const response = await fetch(`${url}/manage/randompassword`, {
       method: "POST",
       headers: {

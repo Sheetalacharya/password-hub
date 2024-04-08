@@ -28,7 +28,6 @@ export default function Home(props) {
 
   useEffect(() => {
     let authToken = localStorage.getItem("authToken");
-    console.log(authToken);
     if (!authToken) {
       navigate("/signup");
     } 
@@ -56,6 +55,7 @@ export default function Home(props) {
     if (!generatedPass) return;
     navigator.clipboard.writeText(generatedPass);
     setCopied(true);
+    showErrorMessage("Copied to clipboard")
   }
 
   function customBtnClick() {
@@ -86,6 +86,7 @@ export default function Home(props) {
       },
       authToken
     );
+    showErrorMessage("Password stored")
   }
   function showErrorMessage(msg) {
     setErrorMsg(msg);
@@ -184,15 +185,17 @@ export default function Home(props) {
         <PopupForCustom
           closePopup={closePopup}
           popupForCustom={popupForCustom}
+          setCopied={setCopied}
         />
       )}
       {popupForRandom && (
         <PopupForRandom
           closePopup={closePopup}
           popupForRandom={popupForRandom}
+          setCopied={setCopied}
         />
       )}
-      {errorMsg && <PopupMsg message={errorMsg} />}
+      {errorMsg && <PopupMsg message={errorMsg} setErrorMsg={setErrorMsg} />}
     </>
   );
 }

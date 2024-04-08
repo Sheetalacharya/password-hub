@@ -130,7 +130,7 @@ export default function PopupForRandom(props) {
         </ul>
         <button onClick={sendToGenerate}>Generate</button>
       </div>
-      {errorMsg && <PopupMsg message={errorMsg}/>}
+      {errorMsg && <PopupMsg message={errorMsg} setErrorMsg={setErrorMsg}/>}
     </div>
   );
 }
