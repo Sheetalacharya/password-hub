@@ -16,6 +16,7 @@ export default function PopupForRandom(props) {
   const [splCharCheck, setSplCheck] = useState(false);
   const [lengthInp, setlen] = useState(4);
   const [errorMsg, setErrorMsg] = useState("");
+  const[msgType,setMsgType]=useState(null)
 
   useEffect(() => {
     function handler(e) {
@@ -33,14 +34,6 @@ export default function PopupForRandom(props) {
     // eslint-disable-next-line
   }, []);
 
-  // function printd() {
-  //   console.log({ numberCheck });
-  //   console.log({ uppercaseCheck });
-  //   console.log({ lowercaseCheck });
-  //   console.log({ splCharCheck });
-  //   console.log({ lengthInp });
-  // }
-
   function sendToGenerate() {
     let authToken = localStorage.getItem("authToken");
     const data = {
@@ -51,13 +44,12 @@ export default function PopupForRandom(props) {
       lengthInp,
     };
     if (
-      !numberCheck ||
-      !uppercaseCheck ||
-      !lowercaseCheck ||
-      !splCharCheck ||
-      !lengthInp
+      !numberCheck &&
+      !uppercaseCheck &&
+      !lowercaseCheck &&
+      !splCharCheck
     ) {
-      return showErrorMessage("Need to check atleat 1 options");
+      return showErrorMessage("Need to check atleat 1 options","error");
     }
     generateRandomPassword(data, authToken);
     setBtnSelected("random");
@@ -65,10 +57,12 @@ export default function PopupForRandom(props) {
     props.closePopup("random", false);
   }
 
-  function showErrorMessage(msg){
-    setErrorMsg(msg);
+  function showErrorMessage(msg,type){
+    setErrorMsg(msg,type);
+    setMsgType(type)
     setTimeout(() => {
       setErrorMsg("");
+      setMsgType(null)
     }, 4000);
   }
 
@@ -130,7 +124,7 @@ export default function PopupForRandom(props) {
         </ul>
         <button onClick={sendToGenerate}>Generate</button>
       </div>
-      {errorMsg && <PopupMsg message={errorMsg} setErrorMsg={setErrorMsg}/>}
+      {errorMsg && <PopupMsg message={errorMsg} setErrorMsg={setErrorMsg} type={msgType}/>}
     </div>
   );
 }

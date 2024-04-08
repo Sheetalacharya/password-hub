@@ -10,19 +10,18 @@ export default function SavedPasscard(props) {
 
   const { _id, password, title, username } = props.password;
   const [savedTitle, setSavedTitle] = useState("");
-  const [savedUname, setSavedUname] = useState("");
   const [savedPass, setSavedPass] = useState("");
   const [copiedUname, setCopiedUname] = useState(false);
   const [copiedPass, setCopiedPass] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+  const [msgType,setMsgType]=useState(null)
   
   const [showPass, setShowPass] = useState(false);
   const [showUname,setShowUName]=useState(false)
 
   useState(() => {
     setSavedTitle(title);
-    setSavedUname(username);
     setSavedPass(password);
   }, [passwords]);
 
@@ -33,7 +32,7 @@ export default function SavedPasscard(props) {
     }else{
       setCopiedPass(true)
     }
-    showErrorMessage("Copied to clipboard")
+    showErrorMessage("Copied to clipboard","success")
   }
 
   function handleEdit() {
@@ -48,20 +47,20 @@ export default function SavedPasscard(props) {
     let authToken=localStorage.getItem("authToken")
     let confirmation=window.confirm(`Do you want to delete password for ${title} with username ${username}`)
     if (confirmation){
-      showErrorMessage(`Deleted successfully`)
       deletePassword(id,authToken)
     }
   }
   function handleEditedText(title, password) {
     setSavedTitle(title);
-    setSavedUname(username);
     setSavedPass(password);
-    setErrorMsg("Password Edited")
+    showErrorMessage("Record Edited Successfully","success")
   }
-  function showErrorMessage(msg) {
+  function showErrorMessage(msg,type) {
     setErrorMsg(msg);
+    setMsgType(type)
     setTimeout(() => {
       setErrorMsg("");
+      setMsgType(null)
     }, 4000);
   }
   return (
@@ -106,7 +105,7 @@ export default function SavedPasscard(props) {
           handleEditedText={handleEditedText}
         />
       )}
-      {errorMsg && <PopupMsg message={errorMsg} setErrorMsg={setErrorMsg} />}
+      {errorMsg && <PopupMsg message={errorMsg} setErrorMsg={setErrorMsg} type={msgType} />}
     </div>
   );
 }

@@ -1,56 +1,3 @@
-/*.savedPass-container{
-    width: 100vw;
-    height: max-content;
-    margin: 30px 0;
-    padding: 20px 0;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;  
-    align-items: center
-}
-.savedPass-container > .savedPass-card{
-    width:80%;
-    height: max-content;
-    background-color: yellow;
-    display: flex;
-    gap: 20px;
-    justify-content: space-around;
-    align-items: center;
-    padding: 15px 0;
-    border-radius: 10px;
-}
- .title-cardField,
-.password-cardField{
-    width: 30%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.password-cardField>i{
-    width: 30px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    margin-left: 5px;
-}
-.title-cardField >input,
-.password-cardField>input{
-    width: 80%;
-    height: 40px;
-    border-radius: 10px;
-    outline: none;
-    border: 1px solid;
-    text-align: center;
-}
-.savedPass-card>.card-buttons>button{
-    padding: 8px 15px;
-    margin: 5px;   
-    border-radius: 10px; 
-    cursor: pointer;
-} */
-
 .savedPass-container{
     width: 90%;
     height: max-content;
@@ -98,7 +45,6 @@
     border-bottom: 1px solid;
     text-align: center;
 }
-/* .savedPass-card>.credentailDiv>input  */
 .savedPass-card>.credentailDiv>.eyeBtn{
     position: absolute;
    right: 8%;

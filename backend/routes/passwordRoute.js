@@ -24,24 +24,17 @@ router.post("/randompassword", LoginStatus, async (req, res) => {
   if (useSpecial) count++;
 
   if (count > length) {
-    return res
-      .status(400)
-      .json({
-        status: "error",
-        error:
-          "Please input a valid length to include all the selected details",
-      });
+    return res.status(400).json({
+      status: "error",
+      error: "Please input a valid length to include all the selected details",
+    });
   }
   if (length < 4) {
-    return res
-      .status(400)
-      .json({
-        status: "error",
-        error: "Length of the password should not be less than 4",
-      });
+    return res.status(400).json({
+      status: "error",
+      error: "Length of the password should not be less than 4",
+    });
   }
-
-  console.log(req.body);
   try {
     const randomPass = generateRandomPassword(
       length,
@@ -53,20 +46,16 @@ router.post("/randompassword", LoginStatus, async (req, res) => {
     );
     res.status(200).json({ status: "success", message: randomPass });
   } catch (e) {
-    console.log(e);
-    res
-      .status(500)
-      .json({
-        status: "error",
-        error: "An error occurred while generating the password.",
-      });
+    res.status(500).json({
+      status: "error",
+      error: "An error occurred while generating the password.",
+    });
   }
 });
 
 // Customized password generation
 router.post("/custompassword", LoginStatus, async (req, res) => {
   const userId = req.user;
-  console.log({custom:req.body});
   const {
     length,
     useName,
@@ -106,24 +95,17 @@ router.post("/custompassword", LoginStatus, async (req, res) => {
   if (others.length != 0) count++;
 
   if (count > length) {
-    return res
-      .status(400)
-      .json({
-        status: "error",
-        error:
-          "Please input a valid length to include all the selected details",
-      });
+    return res.status(400).json({
+      status: "error",
+      error: "Please input a valid length to include all the selected details",
+    });
   }
   if (length < 4) {
-    return res
-      .status(400)
-      .json({
-        status: "error",
-        error: "Length of the password should not be less than 4",
-      });
+    return res.status(400).json({
+      status: "error",
+      error: "Length of the password should not be less than 4",
+    });
   }
-
-  console.log(req.body);
   try {
     const userData = await User.findById(userId);
     if (!userData)
@@ -131,7 +113,6 @@ router.post("/custompassword", LoginStatus, async (req, res) => {
         .status(400)
         .json({ status: "error", error: "password not found" });
     const { name, email, dob, phone } = userData;
-    console.log(userData);
     const customPassword = generateCustomPassword(
       length,
       name,
@@ -152,12 +133,10 @@ router.post("/custompassword", LoginStatus, async (req, res) => {
 
     res.status(200).json({ status: "success", message: customPassword });
   } catch (error) {
-    res
-      .status(500)
-      .json({
-        status: "error",
-        error: "An error occurred while generating the password.",
-      });
+    res.status(500).json({
+      status: "error",
+      error: "An error occurred while generating the password.",
+    });
   }
 });
 
@@ -193,7 +172,6 @@ router.post("/updatepassword:id", LoginStatus, async (req, res) => {
       username,
       password,
     });
-    console.log(updatedPass);
     res.status(201).json({ status: "success", message: updatedPass });
   } catch (error) {
     res.status(500).json({ status: "error", error: "Internal server error" });
@@ -307,39 +285,6 @@ function generateCustomPassword(
     otherShort = "";
   let phone = intPhone.toString();
 
-  // Count the number of character sets selected
-  // if (useName) count++;
-  // if (usePhone) count++;
-  // if (useEmail) count++;
-  // if (useDOB) count++;
-  // if (useLowercase && (useName || useEmail)){
-  //     count=count;
-  // }
-  // else if(useLowercase){
-  //     count++;
-  // }
-  // if (useUppercase && (useName || useEmail)){
-  //     count=count;
-  // }
-  // else if(useUppercase){
-  //     count++;
-  // }
-  // if (useNumbers && (useDOB || usePhone)){
-  //     count=count;
-  // }
-  // else if(useNumbers){
-  //     count++;
-  // }
-  // if (useSpecial) count++;
-  // if (others.length != 0) count++;
-
-  // // validation for length
-  // if(count > length){
-  //     console.log("Please input a valid length to include all the selected details");
-  // }
-  // if(length < 4){
-  //     console.log("Please input a valid length");
-  // }
 
   // Calculate the length of each character set
   let part = Math.floor(length / count);

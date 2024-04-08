@@ -15,7 +15,9 @@ const {passwords}=userState
 
   useEffect(()=>{
     const authToken=localStorage.getItem("authToken")
+    if(!authToken)return navigate("/signup")
     fetchUser(authToken)
+    // eslint-disable-next-line
 },[])
 const url="http://localhost:3001"
 
@@ -48,7 +50,7 @@ async function fetchUser(authToken){
   }
 
   return (
-    <div className='profileContainer'>
+    <>{userData && <div className='profileContainer'>
       <button id="backBtn" onClick={()=>navigate("/")} ><i className="fa-solid fa-arrow-left"></i> Back</button>
       <div className="subProf-container">
       <div className="img"><i className='fa-solid fa-user'></i></div>
@@ -65,6 +67,7 @@ async function fetchUser(authToken){
       </div>
       </div>
       {isEditBtnClicked && <EditUserBox setIsEditBtnClicked={setIsEditBtnClicked} userData={userData} setUserData={setUserData}/>}
-      </div>
+      </div>}
+      </>
   )
 }

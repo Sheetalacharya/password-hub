@@ -1,7 +1,7 @@
 const jwt=require('jsonwebtoken')
 
 
-const secretKey="process.env.SECRET_KEY"
+const secretKey = process.env.SECRETKEY
 
 const LoginStatus =(req,res,next)=>{
     const token=req.header("authToken")

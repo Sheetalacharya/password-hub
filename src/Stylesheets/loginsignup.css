@@ -1,239 +1,206 @@
-.signupBody, .signinBody {
-    background-image: url('../assets/img_blue.jpeg'); 
-    background-size: cover;
-    background-position: center;
-    height:100vh;
-    overflow-x:hidden;
-    overflow-y: scroll;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .wrapper {
-      display: flex;
-      flex-direction: column;
-     
-      padding-bottom: 20px;
-      width: 400px;
-      height: 540px;
-      background-color: rgba(255, 255, 255, 0.3); 
-      border: 2px solid rgba(255, 255, 255, 0.5);
-      border-radius: 20px;
-      backdrop-filter: blur(4px);
-      box-shadow: 0 0 30px rgba(0, 0, 0, .5);
-    }
-    
-    .wrapper .form-box {
-      width: 100%;
-      padding: 30px;
-    }
-    
-    .form-box h2 {
-      font-size: 1.5em;
-      color: #ffffff;
-      text-align: center;
-      margin-top: 20px;
-    }
-    .inputRegister>.eyeBtn,
-    .inputlogin>.eyeBtn{
-      background-color: transparent;
-      border:none;
-      outline: none;
-    }
-    .inputRegister>.eyeBtn>i,
-    .inputlogin>.eyeBtn>i{
-      font-size: 15px;
-    }
-    
-    .inputRegister {
-      position: relative;
-      width: 90%;
-      height: 25px;
-      border-bottom: 2px solid  #062037b8;;
-      margin: 26px 0;
-    }
-    
-    /* .inputRegister label {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%); 
-      left: 5px;
-      font-size: 0.8em;
-      color: #162936;
-      font-weight: 500;
-      pointer-events: none;
-    } */
-    
-    .inputRegister input {
-      width: calc(100% - 30px); 
-      height: 100%;
-      background-color: transparent !important;
-      border: none;
-      outline: none;
-      padding-right: 30px; 
-      margin-bottom: 5px;
-      color: white;
-    }
+.signupBody,
+.signinBody {
+  background-image: url("../assets/img_blue.jpeg");
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-    .inputRegister input[type="date"] {
-      color: rgba(255, 255, 255, 0.3); 
-    }
-    
-    /* .inputRegister img {
-      position: absolute;
-      top: 40%;
-      right: 8px;
-      transform: translateY(-50%); 
-      width: 15px;
-      height: 15px;
-    } */
-    
-    /* .inputRegister input:focus + label,
-  .inputRegister input:not(:placeholder-shown) + label {
-      top: -9px; 
-      
-      color: #6b6b6b; 
-  } */
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 20px;
+  width: 400px;
+  height: 540px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+.wrapper .form-box {
+  width: 100%;
+  padding: 30px;
+}
+
+.form-box h2 {
+  font-size: 1.5em;
+  color: #ffffff;
+  text-align: center;
+  margin-top: 20px;
+}
+.inputRegister > .eyeBtn,
+.inputlogin > .eyeBtn {
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+.inputRegister > .eyeBtn > i,
+.inputlogin > .eyeBtn > i {
+  font-size: 15px;
+}
+
+.inputRegister {
+  position: relative;
+  width: 90%;
+  height: 25px;
+  border-bottom: 2px solid #062037b8;
+  margin: 26px 0;
+}
+
+.inputRegister input {
+  width: calc(100% - 30px);
+  height: 100%;
+  background-color: transparent !important;
+  border: none;
+  outline: none;
+  padding-right: 30px;
+  margin-bottom: 5px;
+  color: white;
+}
+
+.inputRegister input[type="date"] {
+  color: rgba(255, 255, 255, 0.3);
+  width: max-content;
+}
 
 input[type="date"]::-webkit-calendar-picker-indicator {
   color: rgba(0, 0, 0, 0);
   opacity: 1;
   display: block;
   background-repeat: no-repeat;
-  width: 10px;
-  height: 10px;
+  width: 20px;
+  height: 20px;
   border-width: thin;
-  position: absolute;
-  left:29%;
+  position: relative;
 }
-
-
 
 input::-webkit-datetime-edit {
   position: relative;
-  
+}
+
+.btn {
+  width: 30%;
+  text-align: center;
+  height: 45px;
+  background: transparent;
+  border: 0.5px solid white;
+  outline: none;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #fff;
+  font-size: 0.8em;
+  font-weight: 500;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btn:hover {
+  background-color: #062037;
+  transition: 0.2s;
+  color: white;
+}
+
+.register-login {
+  font-size: 0.7em;
+  color: #162938;
+  text-align: center;
+  margin: 10px 0 10px;
+  font-weight: 500;
+}
+.register-login p,
+a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 600;
+}
+.register-login a:hover {
+  text-decoration: underline;
+}
+.inputRegister {
+  display: flex;
+  margin: 15px 0;
+}
+#registerDobLabel {
+  width: 150px;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.errorText {
+  text-align: center;
+  color: red;
+  margin-bottom: 10px;
 }
 
 
-  .btn{
-      width:30%;
-      text-align: center;
-      height:45px;
-      background: transparent;
-      border:0.5px solid white;
-      outline:none;
-      border-radius: 6px;
-      cursor: pointer;
-      color:#fff;
-      font-size: 0.8em;
-      font-weight: 500;
-      margin:0 auto;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-     
-  
-  }
-  .btn:hover{
-    background-color: #062037;
-    transition: 0.2s;
-    color:white;
-  }
-  
-  .register-login{
-      font-size: .7em;
-      color: #162938;
-      text-align: center;
-      margin: 10px 0 10px;
-      font-weight: 500;
-  }
-  .register-login p, a{
-      color: #ffffff;
-      text-decoration: none;
-      font-weight: 600;
-  }
-  .register-login a:hover{
-      text-decoration: underline;
-  }
-  
-  .errorText{
-    text-align: center;
-    color: red;
-    margin-bottom: 10px;
+@media screen and (max-width: 200px) {
+  .wrapper {
+    margin-top: 30px;
+    width: 90%;
   }
 
-  /* */
-  /*  */
+  .form-box {
+    padding: 20px;
+  }
 
-  @media screen and (max-width: 200px) {
-    .wrapper {
-        margin-top: 30px; 
-        width: 90%; 
-    }
+  .inputRegister input {
+    padding-right: 20px;
+  }
 
-    .form-box {
-        padding: 20px; 
-    }
+  .btn {
+    height: 40px;
+    font-size: 0.9em;
+  }
 
-    .inputRegister {
-        margin: 15px 0; 
-    }
-
-    .inputRegister input {
-        padding-right: 20px; 
-    }
-
-    .btn {
-        height: 40px; 
-        font-size: 0.9em;
-    }
-
-    .register-login {
-        margin: 10px 0; 
-    }
+  .register-login {
+    margin: 10px 0;
+  }
 }
-
 
 @media screen and (max-width: 500px) {
-    .wrapper {
-        margin-top: 30px; 
-        width: 75%; 
-    }
+  .wrapper {
+    margin-top: 30px;
+    width: 75%;
+  }
 
-    .form-box {
-        padding: 30px; 
-    }
+  .form-box {
+    padding: 30px;
+  }
 
-    .btn {
-        font-size: 0.8em; 
-    }
+  .btn {
+    font-size: 0.8em;
+  }
 
-    .inputRegister img {
-        display: none; 
-    }
+  .inputRegister img {
+    display: none;
+  }
 }
-@media screen and (max-width: 941px){
-  .wrapper{
+@media screen and (max-width: 941px) {
+  .wrapper {
     margin-top: 50px;
   }
-} 
+}
 
 /* Styling for login page */
 
 .wrapper1 {
   display: flex;
   flex-direction: column;
-  /* margin: auto;
-  margin-top: 100px; */
   padding-bottom: 30px;
   width: 400px;
   height: 400px;
-  background-color: rgba(255, 255, 255, 0.3); 
+  background-color: rgba(255, 255, 255, 0.3);
   border: 2px solid rgba(255, 255, 255, 0.5);
   border-radius: 20px;
   backdrop-filter: blur(4px);
-  box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
 }
 .wrapper1 .form-box {
   width: 100%;
@@ -246,108 +213,75 @@ input::-webkit-datetime-edit {
   border-bottom: 2px solid #162936;
   margin: 25px 0;
 }
-
-/* .inputlogin label {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%); 
-  left: 5px;
-  font-size: 0.9em;
-  color: #162936;
-  font-weight: 500;
-  pointer-events: none;
-} */
-
 .inputlogin input {
-  width: calc(100% - 30px); 
+  width: calc(100% - 30px);
   height: 90%;
   background-color: transparent !important;
   border: none;
   outline: none;
-  padding-right: 30px; 
+  padding-right: 30px;
   color: white;
 }
-.inputlogin input::placeholder, .inputRegister input::placeholder{
+.inputlogin input::placeholder,
+.inputRegister input::placeholder {
   color: rgba(255, 255, 255, 0.3);
 }
-
-/* .inputlogin img {
-  position: absolute;
-  top: 40%;
-  right: 8px;
-  transform: translateY(-50%); 
-  width: 20px;
-  height: 20px;
-} */
-
-/* .inputlogin input:focus + label,
-.inputlogin input:not(:placeholder-shown) + label {
-  top: -3px; 
-  
-  color: #6b6b6b; 
-} */
 
 /* Responsiveness */
 @media screen and (max-width: 300px) {
   .wrapper1 {
-      margin-top: 100px; 
-      width: 90%; 
-      
+    margin-top: 100px;
+    width: 90%;
   }
 
   .form-box {
-      padding: 20px; 
+    padding: 20px;
   }
 
   .inputlogin {
-      margin: 15px 0; 
+    margin: 15px 0;
   }
 
   .inputlogin input {
-      padding-right: 20px; 
+    padding-right: 20px;
   }
 
   .btn {
-      height: 40px; 
-      font-size: 0.9em;
+    height: 40px;
+    font-size: 0.9em;
   }
 
   .register-login {
-      margin: 10px 0; 
+    margin: 10px 0;
   }
   .inputlogin img {
-    display: none; 
-}
+    display: none;
+  }
 }
 @media screen and (max-width: 500px) {
   .wrapper1 {
-      margin-top: 100px; 
-      width: 80%; 
+    margin-top: 100px;
+    width: 80%;
   }
 
   .form-box {
-      padding: 20px; 
+    padding: 20px;
   }
 
   .inputlogin {
-      margin: 30px 0; 
+    margin: 30px 0;
   }
 
   .inputlogin input {
-      padding-right: 30px; 
+    padding-right: 30px;
   }
 
   .btn {
-      height: 42px; 
-      font-size: 0.7em;
+    height: 42px;
+    font-size: 0.7em;
   }
 
   .register-login {
-      margin: 10px 0; 
+    margin: 10px 0;
   }
 }
-
-
-
-
-

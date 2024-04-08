@@ -1,8 +1,13 @@
 const express=require("express")
 const cors=require("cors")
-const app=express()
+const dotenv=require("dotenv")
+
 require("./database/connection")
-const port=3001
+
+const app=express()
+dotenv.config()
+const port=process.env.PORT
+
 
 app.use(cors())
 app.use(express.json())

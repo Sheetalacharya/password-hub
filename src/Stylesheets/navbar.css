@@ -1,57 +1,54 @@
-nav{
-    width: 100vw;
-    height: 70px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color:  rgb(44, 52, 97); 
+nav {
+  width: 100vw;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgb(44, 52, 97);
 }
-nav>div{
-    margin: 50px;
+nav > div {
+  margin: 50px;
 }
-nav>.logo{
-    margin: 40px;
-    cursor: pointer;
+nav > .logo {
+  margin: 40px;
+  cursor: pointer;
 }
-nav>.logo>img{
-    width: 135px;
+nav > .logo > img {
+  width: 135px;
 }
-.profileBtn>button{
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    cursor: pointer;
-    color: rgb(44, 52, 97); 
-    background-color:aliceblue;
+.profileBtn > button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  color: rgb(44, 52, 97);
+  background-color: aliceblue;
 }
-.profileList{
-    position: absolute;
-    top: 70px;
-    right: 20px;
-    background-color:rgb(44, 52, 97); 
-    border: 0px solid;
-    width: 100px;
-    border-radius: 10px;
+.profileList {
+  position: absolute;
+  top: 70px;
+  right: 20px;
+  background-color: rgb(44, 52, 97);
+  border: 0px solid;
+  width: 100px;
+  border-radius: 10px;
+  z-index: 1;
 }
-.profileList>li{
-    margin: 10px 0;
-    list-style: none;
-    text-align: center;
+.profileList > li {
+  margin: 10px 0;
+  list-style: none;
+  text-align: center;
 }
-.profileList>li>button{
-    width: 100px;
-    height: 40px;
-    cursor: pointer;
-    background-color: transparent;
-    border: 0px solid;
-    font-weight:600;
-    color: aliceblue;
-}
-
-.profileList>li>button:hover{
-    border:1px solid white;
+.profileList > li > button {
+  width: 100px;
+  height: 40px;
+  cursor: pointer;
+  background-color: transparent;
+  border: 0px solid;
+  font-weight: 600;
+  color: aliceblue;
 }
 
-/* .logo{
-    background-image: url('../assets/img_blue.jpeg');
-} */
+.profileList > li > button:hover {
+  border: 1px solid white;
+}

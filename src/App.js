@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import "./App.css";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signp";
 import Home from "./pages/Home";
@@ -17,6 +16,7 @@ function App() {
     setAuthToken(localStorage.getItem("authToken"))
     if(authToken) return setIsloggedin(true)
     else setIsloggedin(false)
+  // eslint-disable-next-line
   },[authToken])
 
   
