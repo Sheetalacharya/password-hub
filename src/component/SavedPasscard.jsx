@@ -2,19 +2,20 @@ import React, { useState, useRef, useContext } from "react";
 import "../Stylesheets/savedPass.css";
 import EditBox from "./EditBox";
 import { passwordcontext } from "../context/passwordState";
+import PopupMsg from "./PopupMsg";
 
 export default function SavedPasscard(props) {
   const passwordState = useContext(passwordcontext);
   const { passwords, deletePassword } = passwordState;
 
   const { _id, password, title, username } = props.password;
-  // const [savedTitle, setSavedTitle] = useState(title);
-  // const [savedPass, setSavedPass] = useState(password);
   const [savedTitle, setSavedTitle] = useState("");
   const [savedUname, setSavedUname] = useState("");
   const [savedPass, setSavedPass] = useState("");
-  const [copied, setCopied] = useState(false);
+  const [copiedUname, setCopiedUname] = useState(false);
+  const [copiedPass, setCopiedPass] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
   
   const [showPass, setShowPass] = useState(false);
   const [showUname,setShowUName]=useState(false)
@@ -25,9 +26,14 @@ export default function SavedPasscard(props) {
     setSavedPass(password);
   }, [passwords]);
 
-  function copyToClipboard(data) {
+  function copyToClipboard(data,item) {
     navigator.clipboard.writeText(data);
-    setCopied(true);
+    if(item=="uname"){
+      setCopiedUname(true)
+    }else{
+      setCopiedPass(true)
+    }
+    showErrorMessage("Copied to clipboard")
   }
 
   function handleEdit() {
@@ -41,12 +47,22 @@ export default function SavedPasscard(props) {
   function handleDelete(id,title,username) {
     let authToken=localStorage.getItem("authToken")
     let confirmation=window.confirm(`Do you want to delete password for ${title} with username ${username}`)
-    if (confirmation) return deletePassword(id,authToken)
+    if (confirmation){
+      showErrorMessage(`Deleted successfully`)
+      deletePassword(id,authToken)
+    }
   }
   function handleEditedText(title, password) {
     setSavedTitle(title);
     setSavedUname(username);
     setSavedPass(password);
+    setErrorMsg("Password Edited")
+  }
+  function showErrorMessage(msg) {
+    setErrorMsg(msg);
+    setTimeout(() => {
+      setErrorMsg("");
+    }, 4000);
   }
   return (
     <div className="savedPass-card">
@@ -58,8 +74,8 @@ export default function SavedPasscard(props) {
         <button className="eyeBtn cardIconBtn" onClick={()=>setShowUName(prev=>!prev)}>
           <i className={`fa-solid fa-eye${showUname?"":"-slash"}`}></i>
         </button>
-        <button className="copyBtn cardIconBtn" onClick={()=>copyToClipboard(username)}>
-          <i className="fa-solid fa-copy"></i>
+        <button className="copyBtn cardIconBtn" onClick={()=>copyToClipboard(username,"uname")}>
+          <i className={`fa-${copiedUname?"solid":"regular"} fa-copy`}></i>
         </button> 
       </div>
 
@@ -70,7 +86,7 @@ export default function SavedPasscard(props) {
           <i className={`fa-solid fa-eye${showPass?"":"-slash"}`}></i>
         </button>
         <button className="copyBtn cardIconBtn" onClick={()=>copyToClipboard(savedPass)}>
-          <i className="fa-solid fa-copy"></i>
+          <i className={`fa-${copiedPass?"solid":"regular"} fa-copy`}></i>
         </button>
       </div> 
 
@@ -90,6 +106,7 @@ export default function SavedPasscard(props) {
           handleEditedText={handleEditedText}
         />
       )}
+      {errorMsg && <PopupMsg message={errorMsg} setErrorMsg={setErrorMsg} />}
     </div>
   );
 }

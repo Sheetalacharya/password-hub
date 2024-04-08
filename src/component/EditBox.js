@@ -69,7 +69,7 @@ function showErrorMessage(msg) {
         <button onClick={() => closeEditBox()}>Cancel</button>
        </div>
       </div>
-      {errorMsg && <PopupMsg message={errorMsg} />}
+      {errorMsg && <PopupMsg message={errorMsg} setErrorMsg={setErrorMsg} />}
     </div>
   );
 }
