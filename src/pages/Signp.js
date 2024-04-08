@@ -121,9 +121,11 @@ const Signp = (props) => {
               />
             </div>
             <div className="inputRegister">
+              <label htmlFor="registerDob" id="registerDobLabel" style={{display:`${signupValues.dob?"none":"block"}`}}> Date of Birth </label>
               <input
                 type="date"
                 name="dob"
+                id="registerDob"
                 value={signupValues.dob}
                 onChange={inputHandler}
                 placeholder="DOB"

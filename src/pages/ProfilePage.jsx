@@ -16,6 +16,7 @@ const {passwords}=userState
   useEffect(()=>{
     const authToken=localStorage.getItem("authToken")
     fetchUser(authToken)
+    // eslint-disable-next-line
 },[])
 const url="http://localhost:3001"
 

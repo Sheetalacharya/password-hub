@@ -7,6 +7,7 @@ import PopupForCustom from "../component/PopupForCustom";
 import PopupForRandom from "../component/PopupForRandom";
 import { passwordcontext } from "../context/passwordState";
 import PopupMsg from "../component/PopupMsg";
+import Footer from "../component/Footer";
 
 export default function Home(props) {
   const passwordState = useContext(passwordcontext);
@@ -29,7 +30,7 @@ export default function Home(props) {
   useEffect(() => {
     let authToken = localStorage.getItem("authToken");
     if (!authToken) {
-      navigate("/signup");
+     return navigate("/signup");
     } 
     fetchAllPassword(authToken);
      // eslint-disable-next-line
@@ -40,13 +41,7 @@ export default function Home(props) {
   const [passwordVisble, setPasswordVisible] = useState(false);
   const [copied, setCopied] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
-// 
-  // useEffect(() => {
-  //   if (!props.isloggedin) {
-  //     navigate("/signin");
-  //   }
-  // },[props.isloggedin]);
-
+  const[msgType,setMsgType]=useState(null)
   function closePopup(type, val) {
     type === "custom" ? setPopupForCustom(val) : setPopupForRandom(val);
   }
@@ -55,7 +50,7 @@ export default function Home(props) {
     if (!generatedPass) return;
     navigator.clipboard.writeText(generatedPass);
     setCopied(true);
-    showErrorMessage("Copied to clipboard")
+    showErrorMessage("Copied to clipboard","success")
   }
 
   function customBtnClick() {
@@ -72,12 +67,12 @@ export default function Home(props) {
       navigate("/signin");
     }
     if (titleUnameInp.title === "") {
-      return showErrorMessage("Title cannot be empty");
+      return showErrorMessage("Title cannot be empty","error");
     }
     if (titleUnameInp.username === "")
-      return showErrorMessage("Username is required");
+      return showErrorMessage("Username is required","error");
     if (!generatedPass)
-      return showErrorMessage("Password is not avalible to save");
+      return showErrorMessage("Password is not avalible to save","error");
     savePassword(
       {
         title: titleUnameInp.title,
@@ -86,12 +81,14 @@ export default function Home(props) {
       },
       authToken
     );
-    showErrorMessage("Password stored")
+    showErrorMessage("Password Saved","success")
   }
-  function showErrorMessage(msg) {
+  function showErrorMessage(msg,type) {
     setErrorMsg(msg);
+    setMsgType(type)
     setTimeout(() => {
       setErrorMsg("");
+      setMsgType(null)
     }, 4000);
   }
 
@@ -128,7 +125,7 @@ export default function Home(props) {
               name="username"
               onChange={handleTitleUnameInp}
               value={titleUnameInp.username}
-              ref={titleInputField}
+              
             />
             <div>
               <input
@@ -178,6 +175,7 @@ export default function Home(props) {
         >
           <i className="fa-regular fa-plus"></i>
         </button>
+        <Footer/>
       </div>
 
       {/* popup */}
@@ -195,7 +193,7 @@ export default function Home(props) {
           setCopied={setCopied}
         />
       )}
-      {errorMsg && <PopupMsg message={errorMsg} setErrorMsg={setErrorMsg} />}
+      {errorMsg && <PopupMsg message={errorMsg} setErrorMsg={setErrorMsg} type={msgType}/>}
     </>
   );
 }

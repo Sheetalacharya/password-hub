@@ -3,6 +3,7 @@ import "../Stylesheets/editBox.css";
 import "../Stylesheets/popupForCustom.css"
 import { passwordcontext } from "../context/passwordState";
 import PopupMsg from "./PopupMsg"
+import { type } from "@testing-library/user-event/dist/type";
 
 export default function EditBox(props) {
     const closeEditDiv=useRef()
@@ -13,6 +14,7 @@ export default function EditBox(props) {
     const {closeEditBox,password}=props
     const[editData,setEditData]=useState(password)
     const [errorMsg, setErrorMsg] = useState("");
+    const [msgType,setMsgType]=useState(null)
   
 
     const handleOnchange=(e)=>setEditData({...editData,[e.target.name]:e.target.value})
@@ -31,13 +33,13 @@ export default function EditBox(props) {
 
 function handleEditBtn(){ 
   if(editData.title===""){
-    return showErrorMessage("Title is required")
+    return showErrorMessage("Title is required","error")
   }
   if(editData.username===""){
-    return showErrorMessage("Username is required")
+    return showErrorMessage("Username is required","error")
   }
   if(editData.password===""){
-    return showErrorMessage("Password is required")
+    return showErrorMessage("Password is required","error")
   }
   let authToken=localStorage.getItem("authToken")
   editPassword(editData, authToken,editData._id)
@@ -46,10 +48,12 @@ function handleEditBtn(){
 }
 
 
-function showErrorMessage(msg) {
+function showErrorMessage(msg,type) {
   setErrorMsg(msg);
+  setMsgType(type)
   setTimeout(() => {
     setErrorMsg("");
+    setMsgType(null)
   }, 4000);
 }
 
@@ -69,7 +73,7 @@ function showErrorMessage(msg) {
         <button onClick={() => closeEditBox()}>Cancel</button>
        </div>
       </div>
-      {errorMsg && <PopupMsg message={errorMsg} setErrorMsg={setErrorMsg} />}
+      {errorMsg && <PopupMsg message={errorMsg} setErrorMsg={setErrorMsg} type={msgType} />}
     </div>
   );
 }

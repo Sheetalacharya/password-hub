@@ -2,16 +2,21 @@ import React, { useEffect, useState } from "react";
 import "../Stylesheets/profile.css";
 
 export default function EditUserBox(props) {
-  const { _id, name, email, phone, dob } = props.userData;
+  const { _id, name, phone, dob } = props.userData;
   const [editUserdata, setEditUserData] = useState({
     name,
-    email,
     phone,
     dob,
+    email:props.userData.email
   });
   const url = "http://localhost:3001";
 
   async function updateUser() {
+
+    if(editUserdata.name=="" || editUserdata.phone=="" || editUserdata.dob==""){
+      return
+    }
+
     const authToken = localStorage.getItem("authToken");
     const response = await fetch(`${url}/auth/api/updateuser`, {
       headers: {
@@ -22,7 +27,6 @@ export default function EditUserBox(props) {
       body: JSON.stringify({
         name: editUserdata.name,
         phone: editUserdata.phone,
-        email: editUserdata.email,
         dob: editUserdata.dob,
       }),
     });
@@ -31,8 +35,8 @@ export default function EditUserBox(props) {
       setEditUserData({
         name: editUserdata.name,
         phone: editUserdata.phone,
-        email: editUserdata.email,
         dob: editUserdata.dob,
+        email:props.userData.email
       });
       props.setIsEditBtnClicked(false);
       props.setUserData(editUserdata);
@@ -52,14 +56,6 @@ export default function EditUserBox(props) {
             name="name"
             onChange={handleOnchange}
             value={editUserdata.name}
-          />
-          <input
-            type="email"
-            autoComplete="off"
-            placeholder="email"
-            name="email"
-            onChange={handleOnchange}
-            value={editUserdata.email}
           />
           <input
             type="text"

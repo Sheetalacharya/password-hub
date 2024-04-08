@@ -16,6 +16,7 @@ export default function PopupForCustom(props) {
   const [lengthInp, setlen] = useState(4);
   const [otherWords, setOther] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
+  const[msgType,setMsgType]=useState(null)
 
   const passwordState = useContext(passwordcontext);
   const { generateCustomPassword, setBtnSelected,setSelectedForgen } = passwordState;
@@ -33,23 +34,10 @@ export default function PopupForCustom(props) {
     // eslint-disable-next-line
   }, []);
 
-  function printd() {
-    console.log({ nameCheck });
-    console.log({ numberCheck: numberCheck });
-    console.log({ phoneCheck });
-    console.log({ emailCheck });
-    console.log({ dobCheck });
-    console.log({ uppercaseCheck });
-    console.log({ lowercaseCheck });
-    console.log({ splCharCheck });
-    console.log({ lengthInp });
-    console.log({ otherWords });
-  }
-
   function sendToGenerate(){
     let authToken=localStorage.getItem("authToken")
     if(!nameCheck && !numberCheck && !phoneCheck && !emailCheck && !dobCheck && !uppercaseCheck && !lowercaseCheck && !splCharCheck ){
-      return showErrorMessage("Need to check atleat 1 options")
+      return showErrorMessage("Need to check atleat 1 options","error")
     }
     const data = {
       nameCheck,
@@ -70,10 +58,12 @@ export default function PopupForCustom(props) {
     props.closePopup("custom", false);
   }
 
-  function showErrorMessage(msg) {
+  function showErrorMessage(msg,type) {
     setErrorMsg(msg);
+    setMsgType(type)
     setTimeout(() => {
       setErrorMsg("");
+      setMsgType(null)
     }, 4000);
   }
 
@@ -185,7 +175,7 @@ export default function PopupForCustom(props) {
         </ul>
         <button onClick={sendToGenerate}>Generate</button>
       </div>
-      {errorMsg && <PopupMsg message={errorMsg} setErrorMsg={setErrorMsg} />}
+      {errorMsg && <PopupMsg message={errorMsg} setErrorMsg={setErrorMsg} type={msgType} />}
     </div>
   );
 }
