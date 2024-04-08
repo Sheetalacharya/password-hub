@@ -69,8 +69,6 @@ export default function EditUserBox(props) {
             onChange={handleOnchange}
             value={editUserdata.phone}
           />
-          <div>
-            <label htmlFor="">DOB</label>
           <input
             type="date"
             autoComplete="off"
@@ -79,7 +77,6 @@ export default function EditUserBox(props) {
             onChange={handleOnchange}
             value={editUserdata.dob}
           />
-          </div>
         </div>
         <div className="userEditButtons">
           <button onClick={updateUser}>Edit</button>
