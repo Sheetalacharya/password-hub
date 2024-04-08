@@ -2,7 +2,8 @@
     width: 100vw;
     /* min-height: 100%; */
     height: calc(100vh - 70px);
-    background-color: rgb(223, 223, 220);
+    /*background-color: rgb(223, 223, 220);*/
+    background-color: #F8EDE5;
     padding-top: 50px;  
     overflow-x: hidden;
     overflow-y: scroll;
@@ -18,7 +19,7 @@
 .inputGen-container>form{
     width: 60vw;
     height:50vh;
-    background-color: rgba(189, 188, 163, 0.525); 
+    background-color: #4a8cb067; 
     display: flex;
     gap: 10px;
     align-items: center;
@@ -38,7 +39,7 @@
     padding: 0 20px;
     border-radius: 5px;
     border-radius: 10px;
-    background-color: rgb(107, 105, 93); 
+    background-color: #8e6c56; 
     font-weight: bold;
     color: aliceblue;
 }
@@ -76,6 +77,7 @@
     right: 9%;
     border: 0px;
     background-color: transparent;
+    font-size: medium;
 }
 .inputGen-container>form>div:last-child{
     width: 100%;
@@ -95,7 +97,7 @@
     width: 20%;
     margin-left: 20px;
     margin-right: 20px;
-    background-color: rgb(85, 93, 141); 
+    background-color: rgb(54 64 109);
     font-weight: bold;
     color: aliceblue;
 }
@@ -116,5 +118,7 @@ h2{
     height: 50px;
     border-radius: 50%;
     cursor: pointer;
-    background-color: rgb(127, 173, 114);
+    background-color: #8e6c56;
+    color: white;
+    font-size: medium;
 }

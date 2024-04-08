@@ -20,7 +20,7 @@
       background-color: rgba(255, 255, 255, 0.3); 
       border: 2px solid rgba(255, 255, 255, 0.5);
       border-radius: 20px;
-      backdrop-filter: blur(20px);
+      backdrop-filter: blur(4px);
       box-shadow: 0 0 30px rgba(0, 0, 0, .5);
     }
     
@@ -50,7 +50,7 @@
       position: relative;
       width: 90%;
       height: 25px;
-      border-bottom: 2px solid #162936;
+      border-bottom: 2px solid  #062037b8;;
       margin: 26px 0;
     }
     
@@ -74,6 +74,10 @@
       padding-right: 30px; 
       margin-bottom: 5px;
       color: white;
+    }
+
+    .inputRegister input[type="date"] {
+      color: rgba(255, 255, 255, 0.3); 
     }
     
     /* .inputRegister img {
@@ -116,8 +120,8 @@ input::-webkit-datetime-edit {
       width:30%;
       text-align: center;
       height:45px;
-      background: #162938;
-      border:none;
+      background: transparent;
+      border:0.5px solid white;
       outline:none;
       border-radius: 6px;
       cursor: pointer;
@@ -132,7 +136,8 @@ input::-webkit-datetime-edit {
   
   }
   .btn:hover{
-    background-color: #3b4c58;
+    background-color: #062037;
+    transition: 0.2s;
     color:white;
   }
   
@@ -143,12 +148,12 @@ input::-webkit-datetime-edit {
       margin: 10px 0 10px;
       font-weight: 500;
   }
-  .register-login p a{
-      color: #162938;
+  .register-login p, a{
+      color: #ffffff;
       text-decoration: none;
       font-weight: 600;
   }
-  .register-login p a:hover{
+  .register-login a:hover{
       text-decoration: underline;
   }
   
@@ -227,7 +232,7 @@ input::-webkit-datetime-edit {
   background-color: rgba(255, 255, 255, 0.3); 
   border: 2px solid rgba(255, 255, 255, 0.5);
   border-radius: 20px;
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(4px);
   box-shadow: 0 0 30px rgba(0, 0, 0, .5);
 }
 .wrapper1 .form-box {

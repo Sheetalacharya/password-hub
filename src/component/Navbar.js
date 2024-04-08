@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import "../Stylesheets/navbar.css";
 import { useNavigate } from "react-router-dom";
+import img from "../assets/logo.png"
 
 export default function Navbar(props) {
   const [displayProfileList, setDisplayProfileList] = useState(false);
@@ -24,7 +25,7 @@ export default function Navbar(props) {
 
   return (
     <nav>
-      <div className="logo">Password Hub</div>
+      <div className="logo"><img src={img} alt="" /></div>
       <div className="profileBtn">
         <button className="profileIcon" onClick={handleListVisibility}>
           <i className="fa-solid fa-user"></i>{" "}
