@@ -53,11 +53,11 @@ async function fetchUser(authToken){
       <div className="subProf-container">
       <div className="img"><i className='fa-solid fa-user'></i></div>
         <div className='profileData'>
-        <p>Name :<span> {userData.name}</span></p>
-        <p>Email :<span> {userData.email}</span></p>
-        <p>Phone :<span> {userData.phone}</span></p>
-        <p>DOB :<span> {userData.dob}</span></p>
-        {passwords.length>0?<p>Passwords Stored : <span>{passwords.length} </span></p>:<></>}
+        <p><b>Name :<span> {userData.name}</span></b></p>
+        <p><b>Email :<span> {userData.email}</span></b></p>
+        <p><b>Phone :<span> {userData.phone}</span></b></p>
+        <p><b>DOB :<span> {userData.dob}</span></b></p>
+        {passwords.length>0?<p><b>Passwords Stored : <span>{passwords.length} </span></b></p>:<></>}
         </div>
       <div className='userEditButtons'>
       <button className='profileEditBtn' onClick={()=>setIsEditBtnClicked(true)}>Edit</button>

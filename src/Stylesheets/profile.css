@@ -1,14 +1,14 @@
 .profileContainer{
     width: 100vw;
     height: 100vh;
-    background-color: green;
+    background-color: #F8EDE5;
     display: grid;
     place-content: center;  
 }
 .profileContainer>.subProf-container{
     width: 500px;
     height: 400px;
-    background-color: yellow;
+    background-color: #4a8cb067;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -18,12 +18,13 @@
 .subProf-container>.img{
     width: 100px;
     height: 100px;
-    background-color: rgb(173, 168, 168);
+    background-color: #F8EDE5;
     margin: 20px 0;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+    color: rgb(54 64 109);
 }
 .subProf-container>.img>i{
     font-size: 40px;
@@ -38,7 +39,7 @@
     margin-bottom: 10px;
 }
 .subProf-container>.profileData span{
-    font-weight: bold;
+    font-weight: lighter;
 }
 
 
@@ -60,18 +61,20 @@
 .editUser-container>.editBox{
     height: 500px;
     width: 500px;
-    margin: 0 auto;
-    background-color: red;
+    margin: 60px auto;
+    background-color: #608598;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    border-radius: 10px;
 }
 .editUser-container>.editBox>.editText{
     font-size: 1.7rem;
     font-weight: 600;
     margin-bottom: 20px;
     font-weight: bold;
+    color: white;
 } 
 .editUser-container>.editBox>.editData,
 .editUser-container>.editBox>.editData>div{
@@ -97,15 +100,21 @@
 }
 .userEditButtons button{
     padding: 10px 18px; 
-    margin: 10px ;
+    margin: 20px ;
     border-radius: 10px;
+    background-color: rgb(54 64 109);
+    width: 150px;
+    color: white;
 }
 #backBtn{
     position: absolute;
     top: 10px;
     left: 10px;
     padding: 10px 15px;
-    border-radius: 10px;    
+    border-radius: 10px;  
+    background-color: rgb(54 64 109);
+    width: 100px;
+    color: white;  
 }
 .editData>div>input[type="date"]::-webkit-calendar-picker-indicator{
     display: none;

@@ -107,7 +107,7 @@ export default function Home(props) {
           >
             <div className="mainoptions">
               <button onClick={customBtnClick}>
-                Get password by user Input
+                Get password by user input
               </button>
               <button onClick={randomBtnClick}>Get random password</button>
             </div>
