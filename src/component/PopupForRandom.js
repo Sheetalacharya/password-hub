@@ -51,10 +51,10 @@ export default function PopupForRandom(props) {
       lengthInp,
     };
     if (
-      !numberCheck ||
-      !uppercaseCheck ||
-      !lowercaseCheck ||
-      !splCharCheck ||
+      !numberCheck &&
+      !uppercaseCheck &&
+      !lowercaseCheck &&
+      !splCharCheck &&
       !lengthInp
     ) {
       return showErrorMessage("Need to check atleat 1 options");
