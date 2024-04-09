@@ -10,9 +10,8 @@ export default function Footer() {
       </div>
       <div>
         <ul className="footerIcons">
-          <span>Contact</span>
           <li>
-            <a href="mailto:manishkulal54@g,ail.com">
+            <a href="mailto:manishkulal54@gmail.com">
               <i className="fa-solid fa-envelope"></i>
             </a>
           </li>
@@ -24,6 +23,11 @@ export default function Footer() {
           <li>
             <a href="https://www.instagram.com">
               <i className="fa-brands fa-instagram"></i>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.instagram.com">
+              <i className="fa-brands fa-facebook"></i>
             </a>
           </li>
         </ul>

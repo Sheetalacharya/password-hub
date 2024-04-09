@@ -86,7 +86,6 @@ const Signp = (props) => {
     const data = await response.json();
     if (data.status === "success") {
       localStorage.setItem("authToken", data.message);
-      props.setIsloggedin(true)
       navigate("/")
     }
     else{
@@ -129,6 +128,7 @@ const Signp = (props) => {
                 value={signupValues.dob}
                 onChange={inputHandler}
                 placeholder="DOB"
+                style={{color:`${signupValues.dob?"white":"#ffffff4d"}`}}
               />
             </div>
             <div className="inputRegister">

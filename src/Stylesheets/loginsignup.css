@@ -4,8 +4,7 @@
   background-size: cover;
   background-position: center;
   height: 100vh;
-  overflow-x: hidden;
-  overflow-y: scroll;
+  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -126,7 +125,7 @@ a {
 }
 .inputRegister {
   display: flex;
-  margin: 15px 0;
+  margin: 23px 0;
 }
 #registerDobLabel {
   width: 150px;
@@ -164,24 +163,6 @@ a {
   }
 }
 
-@media screen and (max-width: 500px) {
-  .wrapper {
-    margin-top: 30px;
-    width: 75%;
-  }
-
-  .form-box {
-    padding: 30px;
-  }
-
-  .btn {
-    font-size: 0.8em;
-  }
-
-  .inputRegister img {
-    display: none;
-  }
-}
 @media screen and (max-width: 941px) {
   .wrapper {
     margin-top: 50px;
@@ -260,7 +241,6 @@ a {
 }
 @media screen and (max-width: 500px) {
   .wrapper1 {
-    margin-top: 100px;
     width: 80%;
   }
 
@@ -283,5 +263,22 @@ a {
 
   .register-login {
     margin: 10px 0;
+  }
+
+  .wrapper {
+    margin-top: 30px;
+    width: 90%;
+  }
+
+  .form-box {
+    padding: 30px;
+  }
+
+  .btn {
+    font-size: 0.8em;
+  }
+
+  .inputRegister img {
+    display: none;
   }
 }

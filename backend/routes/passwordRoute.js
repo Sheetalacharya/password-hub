@@ -148,11 +148,39 @@ router.post("/savepassword", LoginStatus, async (req, res) => {
       .status(400)
       .json({ status: "error", error: "Please fill all the details" });
   }
+
   const userId = req.user;
-  const newPassword = new Password({ userId, title, username, password });
+  const newPassword = new Password({
+    userId,
+    title,
+    username,
+    password: encryptPassword(password),
+  });
   try {
     await newPassword.save();
-    res.status(201).json({ status: "success", message: newPassword });
+
+    let decryptedPass = {
+      _id: newPassword._id,
+      userId: newPassword.userId,
+      title: newPassword.title,
+      password: encryptPassword(newPassword.password),
+      username: newPassword.username,
+      date: newPassword.date,
+    };
+
+    // let dPassArr=[]
+    // passwords.map(pass=>{
+    //   let obj={
+    //     "_id": pass._id,
+    //   "userId": pass.userId,
+    //   "title": pass.title,
+    //   "password": encryptPassword(pass.password),
+    //   "username": pass.username,
+    //   "date": pass.date,
+    //   }
+    //   dPassArr.push(obj)
+
+    res.status(201).json({ status: "success", message: decryptedPass });
   } catch (error) {
     res.status(500).json({ status: "error", error: "Internal server error" });
   }
@@ -170,7 +198,7 @@ router.post("/updatepassword:id", LoginStatus, async (req, res) => {
     let updatedPass = await Password.findByIdAndUpdate(passId, {
       title,
       username,
-      password,
+      password: encryptPassword(password),
     });
     res.status(201).json({ status: "success", message: updatedPass });
   } catch (error) {
@@ -197,7 +225,19 @@ router.get("/fetchpasswords", LoginStatus, async (req, res) => {
   const userId = req.user;
   try {
     let passwords = await Password.find({ userId });
-    res.status(201).json({ status: "success", message: passwords });
+    let dPassArr = [];
+    passwords.map((pass) => {
+      let obj = {
+        _id: pass._id,
+        userId: pass.userId,
+        title: pass.title,
+        password: encryptPassword(pass.password),
+        username: pass.username,
+        date: pass.date,
+      };
+      dPassArr.push(obj);
+    });
+    res.status(201).json({ status: "success", message: dPassArr });
   } catch (error) {
     res.status(500).json({ status: "error", error: "Internal server error" });
   }
@@ -219,15 +259,7 @@ function generateRandomPassword(
   const specialChars = "@#$%^";
 
   let characters = "";
-  // let characterCount = 0;
 
-  // // Count the number of character sets selected
-  // if (useLowercase) characterCount++;
-  // if (useUppercase) characterCount++;
-  // if (useNumbers) characterCount++;
-  // if (useSpecial) characterCount++;
-
-  // Calculate the length of each character set
   const partialLength = Math.floor(length / characterCount);
 
   // Populate characters string with selected character sets
@@ -284,7 +316,6 @@ function generateCustomPassword(
     emailShort = "",
     otherShort = "";
   let phone = intPhone.toString();
-
 
   // Calculate the length of each character set
   let part = Math.floor(length / count);
@@ -372,7 +403,7 @@ function generateCustomPassword(
         emailShort =
           emailShort.slice(0, low) +
           emailShort[low].toLowerCase() +
-          nameShort.slice(low + 1, emailShort.length);
+          emailShort.slice(low + 1, emailShort.length);
       }
     }
     characters.push(emailShort);
@@ -498,4 +529,40 @@ function generateCustomPassword(
     }
   }
   return password;
+}
+
+function encryptPassword(password) {
+  const lowercaseChars = "abcdefghijklmnopqrstuvwxyz";
+  const revLowercaseChars = "zyxwvutsrqponmlkjihgfedcba";
+  const uppercaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const revUppercaseChars = "ZYXWVUTSRQPONMLKJIHGFEDCBA";
+  const numberChars = "0123456789";
+  const revNumberChars = "9876543210";
+  const specialChars = " #@!$%^&*()-_+={}[]\\|:;\"'<>,./?~`";
+  const revSpecialChars = "`~?/.,><'\";:|\\][}{=+_-)(*&^%$!@# ";
+
+  let encrypted_password = "";
+  for (let i = 0; i < password.length; i++) {
+    for (let j = 0; j < lowercaseChars.length; j++) {
+      if (password[i] == lowercaseChars[j]) {
+        encrypted_password += revLowercaseChars[j];
+      }
+    }
+    for (let k = 0; k < uppercaseChars.length; k++) {
+      if (password[i] == uppercaseChars[k]) {
+        encrypted_password += revUppercaseChars[k];
+      }
+    }
+    for (let l = 0; l < numberChars.length; l++) {
+      if (password[i] == numberChars[l]) {
+        encrypted_password += revNumberChars[l];
+      }
+    }
+    for (let m = 0; m < specialChars.length; m++) {
+      if (password[i] == specialChars[m]) {
+        encrypted_password += revSpecialChars[m];
+      }
+    }
+  }
+  return encrypted_password;
 }

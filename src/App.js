@@ -1,33 +1,23 @@
-import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signp";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
-
-import PasswordState from "./context/passwordState";
 import ProfilePage from "./pages/ProfilePage";
 
-function App() {
-  const [isloggedin,setIsloggedin]=useState(false)
-  const[authToken,setAuthToken]=useState(localStorage.getItem("authToken"))
+import PasswordState from "./context/passwordState";
 
-  useEffect(()=>{
-    setAuthToken(localStorage.getItem("authToken"))
-    if(authToken) return setIsloggedin(true)
-    else setIsloggedin(false)
-  // eslint-disable-next-line
-  },[authToken])
 
-  
+function App() {  
   return (
     <div className="App">
       <PasswordState>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Home isloggedin={isloggedin} setIsloggedin={setIsloggedin} />} />
-            <Route path="/signin" element={<Signin setIsloggedin={setIsloggedin} />} />
-            <Route path="/signup" element={<Signup setIsloggedin={setIsloggedin} />} />
+            <Route path="/" element={<Home/>} />
+            <Route path="/signin" element={<Signin/>} />
+            <Route path="/signup" element={<Signup/>} />
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="*" element={<NotFound/>} />
           </Routes>

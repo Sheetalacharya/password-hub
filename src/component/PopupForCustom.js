@@ -123,7 +123,7 @@ export default function PopupForCustom(props) {
             />
           </li>
           <li>
-            <label htmlFor={"uppercaseCB"}>UpperCase</label>
+            <label htmlFor={"uppercaseCB"}>UpperCase Characters</label>
             <input
               type="checkbox"
               name="uppercase"
@@ -133,7 +133,7 @@ export default function PopupForCustom(props) {
             />
           </li>
           <li>
-            <label htmlFor={"lowercaseCB"}>LowerCase</label>
+            <label htmlFor={"lowercaseCB"}>LowerCase Characters</label>
             <input
               type="checkbox"
               name="lowercase"

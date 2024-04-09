@@ -15,7 +15,7 @@ footer .footerLogo{
     align-items: center;
 }
 footer .footerLogo>img{
-    width: 200px;
+    width: 160px;
     height: max-content;
     padding: 10px 0;
 }
@@ -30,6 +30,7 @@ footer>div>.footerIcons{
     align-items: center;
     justify-content: center;
     gap: 40px;
+    padding: 25px 0;
 }
 footer>div>.footerIcons>li{
     cursor: pointer;
@@ -37,10 +38,13 @@ footer>div>.footerIcons>li{
 footer>div>.footerIcons>li>a{
     color: black;
 }
+footer>div>.footerIcons>li:hover a{
+    color: white;
+}
 footer>div>.crText{
     height: 50%;
     width: 100%;
-    margin: 20px 0;
+    margin: 8px 0;  
     text-align: center;
 }
 

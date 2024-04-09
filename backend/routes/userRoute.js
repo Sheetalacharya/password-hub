@@ -76,7 +76,5 @@ router.delete('/deleteuser',LoginStatus,async(req,res)=>{
 })
 
 
-
-
-
 module.exports = router
+

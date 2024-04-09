@@ -33,7 +33,8 @@ export default function Home(props) {
      return navigate("/signup");
     } 
     fetchAllPassword(authToken);
-     // eslint-disable-next-line
+    
+    //  eslint-disable-next-line
   }, []);
 
   const [popupForCustom, setPopupForCustom] = useState(false);
@@ -94,7 +95,7 @@ export default function Home(props) {
 
   return (
     <>
-      <Navbar setIsloggedin={props.setIsloggedin} />
+      <Navbar />
       <div className="home-container">
         <div className="inputGen-container">
           <form

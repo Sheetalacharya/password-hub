@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "../Stylesheets/profile.css";
 
 export default function EditUserBox(props) {
-  const { _id, name, phone, dob } = props.userData;
+  const { name, phone, dob } = props.userData;
   const [editUserdata, setEditUserData] = useState({
     name,
     phone,
@@ -13,7 +13,7 @@ export default function EditUserBox(props) {
 
   async function updateUser() {
 
-    if(editUserdata.name=="" || editUserdata.phone=="" || editUserdata.dob==""){
+    if(editUserdata.name==="" || editUserdata.phone==="" || editUserdata.dob===""){
       return
     }
 
@@ -75,7 +75,7 @@ export default function EditUserBox(props) {
           />
         </div>
         <div className="userEditButtons">
-          <button onClick={updateUser}>Edit</button>
+          <button onClick={updateUser}>Save</button>
           <button onClick={() => props.setIsEditBtnClicked(false)}>
             Close
           </button>

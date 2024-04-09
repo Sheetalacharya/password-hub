@@ -1,6 +1,7 @@
 .savedPass-container{
     width: 90%;
     height: max-content;
+    min-height: 30%;
     margin: 0 auto;
     padding: 40px 0;
     display: grid;
