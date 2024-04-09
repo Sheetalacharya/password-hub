@@ -148,8 +148,9 @@ router.post("/savepassword", LoginStatus, async (req, res) => {
       .status(400)
       .json({ status: "error", error: "Please fill all the details" });
   }
+  let encodedPassword = encodePassword(password);
   const userId = req.user;
-  const newPassword = new Password({ userId, title, username, password });
+  const newPassword = new Password({ userId, title, username, password:encodedPassword });
   try {
     await newPassword.save();
     res.status(201).json({ status: "success", message: newPassword });
@@ -166,11 +167,12 @@ router.post("/updatepassword:id", LoginStatus, async (req, res) => {
       .json({ status: "error", error: "Please fill all the details" });
   }
   const passId = req.params.id.replace(":", "");
+  let encodedPassword=encodePassword(password);
   try {
     let updatedPass = await Password.findByIdAndUpdate(passId, {
       title,
       username,
-      password,
+      Password:encodedPassword,
     });
     res.status(201).json({ status: "success", message: updatedPass });
   } catch (error) {
@@ -197,12 +199,54 @@ router.get("/fetchpasswords", LoginStatus, async (req, res) => {
   const userId = req.user;
   try {
     let passwords = await Password.find({ userId });
-    res.status(201).json({ status: "success", message: passwords });
+    let encodedPassword=encodePassword(passwords);
+    res.status(201).json({ status: "success", message: encodedPassword });
   } catch (error) {
     res.status(500).json({ status: "error", error: "Internal server error" });
   }
 });
 module.exports = router;
+
+
+// Function to encode password
+
+function encodePassword(password) {
+  const lowercaseChars = 'abcdefghijklmnopqrstuvwxyz';
+  const revLowercaseChars = 'zyxwvutsrqponmlkjihgfedcba';
+  const uppercaseChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const revUppercaseChars = 'ZYXWVUTSRQPONMLKJIHGFEDCBA';
+  const numberChars = '0123456789';
+  const revNumberChars = '0987654321';
+  const specialChars = '$%^&*()-_+={}[]\\|:;"\'<>,./?~`';
+  const revSpecialChars = '`~?/.,><\'";:|\\][}{=+_-)(*&^%$';
+
+  let encoded_password = "";
+
+      for(let i=0; i<password.length; i++){
+          for(let j=0;j<lowercaseChars.length;j++){
+              if(password[i]==lowercaseChars[j]){
+                  encoded_password+=revLowercaseChars[j];
+              }
+          }
+          for(let k=0;k<uppercaseChars.length;k++){
+              if(password[i]==uppercaseChars[k]){
+                  encoded_password+=revUppercaseChars[k];
+              }
+          }
+          for(let l=0;l<numberChars.length;l++){
+              if(password[i]==numberChars[l]){
+                  encoded_password+=revNumberChars[l];
+              }
+          }
+          for(let m=0;m<specialChars.length;m++){
+              if(password[i]==specialChars[m]){
+                  encoded_password+=revSpecialChars[m];
+              }
+          }
+      }
+      return encoded_password;
+}
+
 
 // Function to generate random password
 function generateRandomPassword(
@@ -372,7 +416,7 @@ function generateCustomPassword(
         emailShort =
           emailShort.slice(0, low) +
           emailShort[low].toLowerCase() +
-          nameShort.slice(low + 1, emailShort.length);
+          emailShort.slice(low + 1, emailShort.length);
       }
     }
     characters.push(emailShort);
